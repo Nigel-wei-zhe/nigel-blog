@@ -1,4 +1,4 @@
-baseURL = "https://your-github-username.github.io/"
+baseURL = "https://www.nigel-lee.com/"
 languageCode = 'en-us'
 title = 'Nigel 隨便寫'
 theme = '/solar-theme-hugo/'
