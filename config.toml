@@ -1,3 +1,25 @@
-baseURL = 'http://example.org/'
+baseURL = "https://your-github-username.github.io/"
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Nigel 隨便寫'
+theme = '/solar-theme-hugo/'
+
+
+paginate = 5
+pygmentsStyle = "solarized-light" # solarized-light, -dark or -dark256
+copyright = "Copyright © 2022 nigel-lee. All rights reserved."
+
+[params]
+  scheme = "dark" # light, dark, gray or preference
+  descriptionCh = "唯一應該超越的人，是昨天的自己"
+  descriptionEn = "The only person you should try to be better than, is who you were yesterday."
+
+
+[menu]
+  [[menu.main]]
+    name = "About Me"
+    identifier = '關於我'
+    url = "/about"
+  [[menu.main]]
+    name = "Blog"
+    identifier = "網誌"
+    url = "/posts"

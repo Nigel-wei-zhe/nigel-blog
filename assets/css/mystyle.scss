@@ -1,0 +1,13 @@
+.nav {
+  .nav-item {
+    margin: 8px 0;
+    font-size: 1rem;
+    line-height: 1rem;
+    display: flex;
+    flex-direction: column;
+    .identifier {
+      font-size: 0.5rem;
+      line-height: 0.6rem;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<nav>
+	{{ range .Site.Menus }}
+		<ul class="nav">
+			{{ range . }}
+				<li>
+					<a {{ if eq .Name "Mastodon" }}rel="me" {{ end }}href="{{ .URL }}">
+						<div class="nav-item">
+							<span>{{ .Name }}</span>
+							<span class="identifier">{{ .Identifier }}</span>
+						</div>
+					</a>
+				</li>
+			{{ end }}
+		</ul>
+	{{ end }}
+</nav>
