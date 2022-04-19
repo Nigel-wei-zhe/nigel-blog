@@ -1,4 +1,4 @@
-baseURL = "https://www.nigel-lee.com/"
+baseURL = "https://nigel-wei-zhe.github.io/nigel-blog/"
 languageCode = 'en-us'
 title = 'Nigel 隨便寫'
 theme = '/solar-theme-hugo/'
