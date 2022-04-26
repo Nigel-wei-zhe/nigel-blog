@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>multer</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/multer/">multer</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="介紹">介紹</h1>
+<hr>
+<blockquote>
+<p>Multer 是一個 node.js 的中間件，&ldquo;只&quot;用於處理 multipart/form-data 類型的數據，主要用於上傳</p>
+</blockquote>
+<p>安裝:</p>
+<pre><code>npm install --save multer
+</code></pre>
+<h1 id="參數">參數</h1>
+<hr>
+<h2 id="reqfile-的屬性">req.file 的屬性</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Key</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fieldname</td>
+<td style="text-align:center">表單上面的名稱</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">originalname</td>
+<td style="text-align:center">電腦上顯示的檔案名稱</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">encoding</td>
+<td style="text-align:center">編碼</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">mimetype</td>
+<td style="text-align:center">文件的mime 類型</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">size</td>
+<td style="text-align:center">文件大小 (位元組)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">destination</td>
+<td style="text-align:center">路徑</td>
+<td style="text-align:center">DiskStorage</td>
+</tr>
+<tr>
+<td style="text-align:center">filename</td>
+<td style="text-align:center">保存在 destination 的名稱</td>
+<td style="text-align:center">DiskStorage</td>
+</tr>
+<tr>
+<td style="text-align:center">path</td>
+<td style="text-align:center">完整路徑</td>
+<td style="text-align:center">DiskStorage</td>
+</tr>
+<tr>
+<td style="text-align:center">buffer</td>
+<td style="text-align:center">存放檔案的內存</td>
+<td style="text-align:center">MemoryStorage</td>
+</tr>
+</tbody>
+</table>
+<h2 id="multeropts-的--opts">multer(opts) 的  opts</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Key</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">dest or storage</td>
+<td style="text-align:center">存放位置</td>
+</tr>
+<tr>
+<td style="text-align:center">fileFilter</td>
+<td style="text-align:center">過濾 (函式)</td>
+</tr>
+<tr>
+<td style="text-align:center">limits</td>
+<td style="text-align:center">限制數據</td>
+</tr>
+<tr>
+<td style="text-align:center">preservePath</td>
+<td style="text-align:center">保存完整文件路徑</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>storage</p>
+</blockquote>
+<pre><code>const upload = multer({ dest: 'uploads/' })
+// 存放在 uploads 資料夾裡
+
+or
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },   // 存放在 uploads 資料夾裡
+  filename: function (req, file, cb) {
+	cb(null, file.originalname)
+  }    // 設定檔案的名稱，沒有設定的話是隨機並且沒有副檔名
+})
+
+const upload = multer({ storage: storage })
+</code></pre>
+<p>存於內存:</p>
+<pre><code>const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
+</code></pre>
+<blockquote>
+<p>limits</p>
+</blockquote>
+<p>fieldNameSize – 欄位名最大尺寸。預設值：100 bytes</p>
+<p>fieldSize – 欄位值最大尺寸。預設值：1MB</p>
+<p>fields – 非檔案欄位的最大數量。預設值：Infinity</p>
+<p>fileSize – multipart 表單中，檔案的最大尺寸。預設值：Infinity</p>
+<p>files – multipart 表單中，檔案最大數量。預設值：Infinity</p>
+<p>parts – multipart 表單中，最大元件(fields files)數量。預設值：Infinity</p>
+<p>headerPairs – 預設值：2000</p>
+<p>範例:</p>
+<pre><code>const upload = multer({
+  limit: {
+    fileSize: 1000000 // 限制上傳檔案的大小為 1MB = 1000000 bytes
+  }
+})
+</code></pre>
+<blockquote>
+<p>fileFilter</p>
+</blockquote>
+<p>過濾函示，直接上範例</p>
+<pre><code>const onlyImage = function (req, file, cb) {
+  const reg = /^image\/*/   // 正規驗證 image 類型的檔案
+  if (reg.test(file.mimetype)) {
+
+	// 若接受該檔案，呼叫 cb() 並帶入 true
+	cb(null, true)
+
+  } else {
+
+  	// 自訂一個屬性 fileValidationError 加到 req 中
+	req.fileValidationError = `上傳檔案格式錯誤` 
+
+
+	// 若不接受該檔案，呼叫 cb() 並帶入 false, 錯誤訊息可帶可不帶
+	cb(null, false, new Error('上傳檔案格式錯誤'))
+  }
+}
+
+const upload = multer({ fileFilter: onlyImage })
+</code></pre>
+<h2 id="multeropts-後面接的方法">multer(opts) 後面接的方法</h2>
+<blockquote>
+<p>.single(fieldname)</p>
+</blockquote>
+<p>接受 &ldquo;一個&rdquo; 名稱為 &ldquo;fieldname&rdquo; 的資料。 資料存在 req.file</p>
+<blockquote>
+<p>.array(fieldname[, maxCount])</p>
+</blockquote>
+<p>接受 &ldquo;數個&rdquo; 名稱為 &ldquo;fieldname&rdquo; 的資料，maxCount 限制最大數量。 資料存在 req.files</p>
+<blockquote>
+<p>.fields(fields)</p>
+</blockquote>
+<p>接受 &ldquo;數組&rdquo; 名稱不同 的資料。 資料存在 req.files</p>
+<pre><code>[
+  { name: 'avatar', maxCount: 1 },
+  { name: 'gallery', maxCount: 8 }
+]
+</code></pre>
+<blockquote>
+<p>.any()</p>
+</blockquote>
+<p>接受一切上傳的資料。資料存在 req.files</p>
+<blockquote>
+<p>.none()</p>
+</blockquote>
+<p>只接受文本域</p>
+<h1 id="範例">範例</h1>
+<hr>
+<p>html:</p>
+<pre><code>&lt;form action=&quot;/profile&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+  &lt;input type=&quot;file&quot; name=&quot;avatar&quot;&gt;
+&lt;/form&gt;
+
+	or
+
+&lt;input type=&quot;file&quot; ref=&quot;files&quot;&gt;
+
+...
+
+ const uploadFile = this.$refs.files.files[0]
+ const formData = new FormData()
+ formData.append('avatar', uploadFile)
+</code></pre>
+<p>server:</p>
+<pre><code>const express = require('express')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
+const app = express()
+
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+})
+
+app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {
+  // req.files is array of `photos` files
+  // req.body will contain the text fields, if there were any
+})
+</code></pre>
+<h1 id="參考連結">參考連結</h1>
+<hr>
+<p><a href="https://github.com/expressjs/multer">Multer</a></p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">24. November 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

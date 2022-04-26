@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>使用github.io佈署自己的website&#34;</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/">使用github.io佈署自己的website&#34;</a> 
+  </h1>
+
+  <div class="post-content"><p>Github有提供可以呈現靜態檔案的伺服器
+只有靜態檔案，所以動態網頁是無法呈現的</p>
+<p>使用方法如下:</p>
+<hr>
+<p>1.Create a repository</p>
+<p>前往 github 創一個新的 repository 名稱必須和使用者一樣 ( 使用者名稱/使用者名稱.github.io )
+舉例:
+Nigel-wei-zhe/Nigel-wei-zhe.github.io</p>
+<p>!!!  要設定為 Public !!!</p>
+<hr>
+<p>2.在本地端建立資料夾</p>
+<p>創好 repository 後 可以選擇在本地端clone一個資料夾或者自己創一個透過git指令上傳
+這邊示範自己建資料夾git上傳</p>
+<p>首先在桌面創建一個資料夾 page
+並在資料夾裡隨意新增一個 index.html
+隨便寫點內容</p>
+<p>index.html:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;body&gt;
+		&lt;h1&gt;Hello World&lt;/h1&gt;
+		&lt;p&gt;I'm hosted with GitHub Pages.&lt;/p&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>存檔</p>
+<p>接著透過上方路徑列開啟cmd</p>
+<pre><code>C:\Users\Nigel\Desktop\page&gt;
+</code></pre>
+<p>開始添加git指令:</p>
+<pre><code>echo &quot;# my first page&quot; &gt;&gt; README.md
+git init
+git add .
+git commit -m &quot;first commit&quot;
+git remote add origin https://github.com/(你的名稱)/(你的名稱).github.io.git
+git push -u origin master
+</code></pre>
+<p>上傳完之後，幾分鐘後應該就能在 https://(你的名稱).github.io/ 上  看到自己的網頁了~</p>
+<hr>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">05. October 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

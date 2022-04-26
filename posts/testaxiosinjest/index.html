@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Jest 學習筆記</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/testaxiosinjest/">Jest 學習筆記</a> 
+  </h1>
+
+  <div class="post-content"><h2 id="how-to-test-axios-by-jest">How to test axios by jest</h2>
+<p>最近剛好在寫單元測試,看了些東西,有些眉眉角角,像是有函式在 Node.js 下並不支援,導致單元測試過不了。<!-- raw HTML omitted -->
+像是這篇 <a href="https://stackoverflow.com/questions/65295584/jest-typeerror-replaceall-is-not-a-function">Jest: TypeError: replaceAll is not a function
+</a></p>
+<hr>
+<p>那麼在寫單元測試時,有碰到 axios,所以就稍微查網路做功課,以下就列出看到的方法</p>
+<ol>
+<li>藉由 jest.mock 替換掉 axios
+<blockquote>
+<p>SUT: System Under Test 測試目標<!-- raw HTML omitted -->
+DOC: Depended-on Component 依賴組件<!-- raw HTML omitted -->
+情況是這樣,有時候 SUT 有太多的 DOC ,為了避免模糊焦點,讓測試邏輯相對單純,所以可以會把一些 相依的 DOC,採用 mock 替換掉, 讓測試不失焦。</p>
+</blockquote>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> axios from <span style="color:#0ff;font-weight:bold">&#34;axios&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>jest.mock(<span style="color:#0ff;font-weight:bold">&#34;axios&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>describe(<span style="color:#0ff;font-weight:bold">&#34;axios 流程&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    test(<span style="color:#0ff;font-weight:bold">&#34;success&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">const</span> data = {
+</span></span><span style="display:flex;"><span>            success: <span style="color:#fff;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#007f7f">// 在axios.get上面用mock提供的函式 回傳一個 &#34;一次性&#34; function
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>        axios.get.mockImplementationOnce(() =&gt; <span style="color:#fff;font-weight:bold">Promise</span>.resolve(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        expect(axios.get(<span style="color:#0ff;font-weight:bold">&#39;fakeUrl&#39;</span>)).resolves.toEqual(data);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><ol start="2">
+<li>引用
+<blockquote>
+<p>axios.interceptors 裡面也有邏輯要做測試,如果用上面那一招,會被蓋掉<!-- raw HTML omitted -->
+蓋掉不用測這樣覆蓋率就 100%了 XD</p>
+</blockquote>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#007f7f">// 基於 axios 再次封裝的 request 有在 interceptors 寫些邏輯
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">import</span> request from <span style="color:#0ff;font-weight:bold">&#34;@/utils/request&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">const</span> mockData = {
+</span></span><span style="display:flex;"><span>  config: {
+</span></span><span style="display:flex;"><span>    url: <span style="color:#0ff;font-weight:bold">&#34;/test&#34;</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  data: <span style="color:#0ff;font-weight:bold">&#34;test&#34;</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>describe(<span style="color:#0ff;font-weight:bold">&#34;request interceptors flow ~&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#007f7f">// resolve 流程
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  <span style="color:#fff;font-weight:bold">const</span> fulfilled = request.interceptors.request.handlers[<span style="color:#ff0;font-weight:bold">0</span>].fulfilled;
+</span></span><span style="display:flex;"><span>  test(<span style="color:#0ff;font-weight:bold">&#34;resolve handle&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    expect(fulfilled(mockData)).toEqual(mockData);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  <span style="color:#007f7f">// resolve 流程
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  <span style="color:#fff;font-weight:bold">const</span> rejected = request.interceptors.request.handlers[<span style="color:#ff0;font-weight:bold">0</span>].rejected;
+</span></span><span style="display:flex;"><span>  test(<span style="color:#0ff;font-weight:bold">&#34;resolve handle&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    rejected();
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>describe(<span style="color:#0ff;font-weight:bold">&#34;response interceptors flow ~&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#007f7f">// resolve 流程
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  <span style="color:#fff;font-weight:bold">const</span> fulfilled = request.interceptors.response.handlers[<span style="color:#ff0;font-weight:bold">0</span>].fulfilled;
+</span></span><span style="display:flex;"><span>  test(<span style="color:#0ff;font-weight:bold">&#34;resolve handle&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    expect(fulfilled(mockData)).toEqual(mockData);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  <span style="color:#007f7f">// resolve 流程
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  <span style="color:#fff;font-weight:bold">const</span> rejected = request.interceptors.response.handlers[<span style="color:#ff0;font-weight:bold">0</span>].rejected;
+</span></span><span style="display:flex;"><span>  test(<span style="color:#0ff;font-weight:bold">&#34;resolve handle&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    rejected();
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>以上就是 這次為了測試 axios 有用到的方法,繼續提升覆蓋率~</p>
+<p>#####參考資料
+<a href="https://www.robinwieruch.de/axios-jest">How to test Axios in Jest by Example</a><!-- raw HTML omitted -->
+<a href="https://github.com/axios/axios">axios</a><!-- raw HTML omitted -->
+<a href="https://jestjs.io/docs/mock-functions">Jest-Mocking Modules</a></p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">02. June 2021</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

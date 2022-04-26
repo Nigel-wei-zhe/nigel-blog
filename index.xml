@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/</link>
+    <description>Recent content on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Mon, 18 Apr 2022 16:31:39 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jest 學習筆記</title>
+      <link>https://nigel-wei-zhe.github.io/posts/testaxiosinjest/</link>
+      <pubDate>Wed, 02 Jun 2021 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/testaxiosinjest/</guid>
+      <description>How to test axios by jest 最近剛好在寫單元測試,看了些東西,有些眉眉角角,像是有函式在 Node.js 下並不支援,導致單元測試過不了。像是這篇 Jest: TypeError: replaceAll is not a function 
+ 那麼在寫單元測試時,有碰到 axios,所以就稍微查網路做功課,以下就列出看到的方法
+ 藉由 jest.mock 替換掉 axios  SUT: System Under Test 測試目標DOC: Depended-on Component 依賴組件情況是這樣,有時候 SUT 有太多的 DOC ,為了避免模糊焦點,讓測試邏輯相對單純,所以可以會把一些 相依的 DOC,採用 mock 替換掉, 讓測試不失焦。
+   import axios from &amp;#34;axios&amp;#34;  jest.mock(&amp;#34;axios&amp;#34;)  describe(&amp;#34;axios 流程&amp;#34;, () =&amp;gt; {  test(&amp;#34;success&amp;#34;, () =&amp;gt; {  const data = {  success: true  }  // 在axios.</description>
+    </item>
+    
+    <item>
+      <title>createElement 隨手記</title>
+      <link>https://nigel-wei-zhe.github.io/posts/createelement/</link>
+      <pubDate>Sat, 15 May 2021 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/createelement/</guid>
+      <description>關於 createElement Document.createElement()  創造一個元素,搭配其他 api 可以實現在指定的元素後,把創造出來的新元素添加上去
+ const title = document.createElement(&amp;#34;div&amp;#34;); title.innerText = &amp;#34;Hello world&amp;#34;; document.getElementsByTagName(&amp;#34;body&amp;#34;)[0].appendChild(title); vue createElement()  vue 製作 Virtual DOM 的函式,透過 render function 呼叫 createElement 來創造, 內部含有實現進行 diff 算法比較新舊 Virtual DOM 的差異,進而觸發渲染
+ Vue.component(&amp;#34;hello-world&amp;#34;, {  render(createElement) {  return createElement(&amp;#34;h1&amp;#34;, {  domProps: {  innerHTML: &amp;#34;Hello world&amp;#34;,  },  });  }, });  vue createElement() 應用  參數相關設定可以直接參考 官網。 直接舉個使用經驗,今天有一個需求是需要基於 vue 提供的 transition 的标签名進行加工 目的是想透過 transition 本身針對 enter 跟 leave 的相關事件,來實作收合</description>
+    </item>
+    
+    <item>
+      <title>Array.prototype.reduce 不只可以當作計數器</title>
+      <link>https://nigel-wei-zhe.github.io/posts/arrayprototypereduce/</link>
+      <pubDate>Thu, 08 Apr 2021 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/arrayprototypereduce/</guid>
+      <description>語法 array.reduce(  callback[(accumulator, currentValue, currentIndex, array)],  initialValue );  物件陣列轉 mapping 表 array.reduce((map, item) =&amp;gt; Object.assign(map, { [item.id]: item.name }), {}); 二維陣列轉一維 array.reduce((acc, cur) =&amp;gt; {  return acc.concat(cur); }, []); 統計陣列中元素出現次數 array.reduce((acc, cur) =&amp;gt; {  if (cur in acc) {  acc[cur] = 1;  } else {  acc[cur] += 1;  }  return acc; }, {}); 物件陣列依條件分類 array.reduce((acc, cur) =&amp;gt; {  if (!</description>
+    </item>
+    
+    <item>
+      <title>HTTP - cache</title>
+      <link>https://nigel-wei-zhe.github.io/posts/http-cache/</link>
+      <pubDate>Wed, 15 Jan 2020 11:11:40 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/http-cache/</guid>
+      <description>序  快取(cache)，聽過也大概知道有甚麼作用，但其中的原理還有 Header 中的一些相關配置就不是這麼的了解 所以整理了一下資料讓自己更清楚。
+快取(Cache) 是甚麼  今天要瀏覽一個網頁，流程會是這樣
+ 瀏覽器 &amp;ndash; 請求 &amp;ndash;&amp;gt; 伺服器 &amp;ndash; 提供HTML、images&amp;hellip;等相關資源 &amp;ndash;&amp;gt; 瀏覽器
+ 所以每次想要瀏覽一個網頁，就要從網頁伺服器，下載頁面、 圖片等等&amp;hellip;的資源，假設今天那個網頁不常更新，內容其實都一樣，這樣每次下載一樣的東西，流量不就是浪費了嗎? 這時候 快取(Cache) 就派上用場了。
+快取(Cache) 就是把比較不常變動的資源儲存起來在瀏覽器的快取中，當使用者今天要拜訪這個網頁時，就能快速把資料取出來。 可以節省流量，也因為不用再下載，也可以節省時間。
+Expires  那麼要怎麼讓瀏覽器知道，這個頁面要快取呢? 可以在 HTTP Response Header 裡面添加 Expires Expires 是 HTTP 1.0 的 Header
+Expires: Tue, 12 Jan 2021 14:41:30 GMT 瀏覽器收到這個Response，就會把資源快取下來，當下一次瀏覽器要再次瀏覽這個網頁，瀏覽器會檢查自己本身的時間，去比對是否有過期，超過 Expires 的時間，如果沒有超過，瀏覽器就不會發送 Request ，直接從 快取 中拿取資料。
+那麼會有一個問題，瀏覽器比對是根據自己本身的時間，假設自己本身時間被改過，那麼就會失準。
+Cache-Control: max-age  為了解決這個問題 HTTP 1.1 堆出了 新的 Header，用法如下
+Cache-Control: max-age=10 意思是這個請求的到期時間是10秒，在10秒之內重新整理，都是從快取裡面拿資料，超過10秒之後，才會重新送新的 Request。</description>
+    </item>
+    
+    <item>
+      <title>Google Analytics</title>
+      <link>https://nigel-wei-zhe.github.io/posts/google-analytics/</link>
+      <pubDate>Mon, 30 Dec 2019 21:41:49 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/google-analytics/</guid>
+      <description>開發網站絕對不是為了自己開心，通常都有目的性，不論是分享資訊、廣告、賣東西 那麼就會有個問題出來了，究竟有多少人看過我的網站呢? 流量如何? 都是從哪裡連過來 所以就會套用網路分析工具，在自己的網頁中埋code，方便統計這些數據，從而優化自己網站，增加流量
+Google Analytics 那麼用自己的 blog 為例，目前引擎採用 hugo v0.58 根據官方的文件，是有 Internal Templates 只需要簡單添加幾行code就可以開通了
+那麼第一步當然就是先去 Google Analytics 註冊開通，完成後應該會拿到一組 ##追蹤 ID##
+大概是長這樣
+UA-123xxxxxx-0  取得之後 就可以去 hugo 的 config.toml 裡 加入一行
+googleAnalytics = &amp;quot;UA-123xxxxxx-0&amp;quot;  之後去你的 index 模板 加入
+{{ template &amp;quot;_internal/google_analytics.html&amp;quot; . }}  run hugo server
+接著去 Google Analytics 後台 看 即時流量 應該會有 &amp;ldquo;1&amp;rdquo; 就表示成功了，可以追蹤到你的網頁了
+那麼補充一下可以在你的網址中加入 UTM 更能清楚知道來自哪邊
+utm_source=FB // 活動來源 utm_medium=social // 活動媒介 utm_campaign=ZZZ // 活動名稱  </description>
+    </item>
+    
+    <item>
+      <title>Flexbox 屬性</title>
+      <link>https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/</link>
+      <pubDate>Wed, 25 Dec 2019 15:47:49 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/</guid>
+      <description>display: flex flex: 主要是 main axis 與 cross axis 構成
+main axis &amp;gt; 左右向
+cross axis &amp;gt; 上下向
+那麼有一些設定屬性，如下。
+flex-direction  設定主軸 (main axis) 的方向
+ .container {display: flex;flex-direction: row; // 橫向flex-direction: row-reverse; // 橫向，反序排列flex-direction: column; // 主軸變直向flex-direction: column-reverse; // 主軸變直向, 反序排列} justify-content  與主軸 (main axis) 的對齊方式
+ .container {display: flex;justify-content: flex-start; // 靠左justify-content: flex-end; // 靠右justify-content: center; // 置中justify-content: space-between; // 貼齊父容器，每個子元素的間格一致justify-content: space-around; // 與父容器的間格為，每個元素間格的一半justify-content: space-evenly; // 每個元素與父容器都是相同的間格} align-items  交叉軸 (cross axis) 的對齊方式</description>
+    </item>
+    
+    <item>
+      <title>Shallow Copy &amp; Deep Copy</title>
+      <link>https://nigel-wei-zhe.github.io/posts/shallow-copy-_-deep-copy/</link>
+      <pubDate>Wed, 18 Dec 2019 09:44:32 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/shallow-copy-_-deep-copy/</guid>
+      <description>Data Type (型別)  首先在JS中,可分為 Primitive Type (基本型別) 跟 Non-Primitive Type (非基本型別)
+ Primitive: Number、 String、 Boolean、 Null、 Undefined Non-Primitive: Object、 Array、 Function、 Date、 Regx  兩者差異在於，給值方式的不同
+那麼可以分為 By value (值) 跟 By reference (參考位置)
+  Primitive Type 是 By value
+用 Number 舉例:
+ var a = 1var b = ab = 2console.log(a); // Output: 1console.log(b); // Output: 2// 修改 b 時不會修改到 a   Non-Primitive Type 是 By reference</description>
+    </item>
+    
+    <item>
+      <title>Session</title>
+      <link>https://nigel-wei-zhe.github.io/posts/session/</link>
+      <pubDate>Fri, 06 Dec 2019 15:23:37 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/session/</guid>
+      <description>Session 介紹  HTTP協議上本身是&amp;quot;無狀態&amp;quot;的,就是單純的傳送、接收，無法紀錄使用者的一些資訊， 所以 cookie 及 session 的這種機制就被發明出來了,那透一個情景來理解 Session 今天一位客人進入一間餐廳，服務生會發給他一張會員卡，上面會有一組會員ID 並在餐廳內部電腦記錄了，這個 ID 是哪位顧客持有的，並把基本資料 (姓名、電話) 跟這個 ID 綁定在一起 當下次這位顧客來到餐廳，出示他的會員卡，服務生就能透過會員的ID去查客人的基本資料 那麼 這裡面的 會員ID 就是 Session ID 藉由這個機制，就可以擴充HTTP協議本身是無狀態，讓一些新的應用產生
+express-session  NPM:
+npm install express-session Example:
+var express = require(&#39;express&#39;)var session = require(&#39;express-session&#39;)app.use(session({name: &#39;connect.sid&#39; // 設置在cookie中,保存session的名稱,預設為&#39;connect.sid&#39;store: ,// 默認存在內存中，可以改成 redis, mongodb 等secret: &#39;keyboard cat&#39;, // 加密字串resave: false, //每次請求要不要再重新發送 session saveUninitialized: true // 再沒有不論有沒有 session 每次請求都會發送 session cookiecookie: { maxAge: 10 * 1000 } // 設定有效時間}))app.</description>
+    </item>
+    
+    <item>
+      <title>multer</title>
+      <link>https://nigel-wei-zhe.github.io/posts/multer/</link>
+      <pubDate>Sun, 24 Nov 2019 16:08:57 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/multer/</guid>
+      <description>介紹   Multer 是一個 node.js 的中間件，&amp;ldquo;只&amp;quot;用於處理 multipart/form-data 類型的數據，主要用於上傳
+ 安裝:
+npm install --save multer 參數  req.file 的屬性    Key Description Note     fieldname 表單上面的名稱    originalname 電腦上顯示的檔案名稱    encoding 編碼    mimetype 文件的mime 類型    size 文件大小 (位元組)    destination 路徑 DiskStorage   filename 保存在 destination 的名稱 DiskStorage   path 完整路徑 DiskStorage   buffer 存放檔案的內存 MemoryStorage    multer(opts) 的 opts    Key Description     dest or storage 存放位置   fileFilter 過濾 (函式)   limits 限制數據   preservePath 保存完整文件路徑     storage</description>
+    </item>
+    
+    <item>
+      <title>Unable to retrieve a connection&#39;s remote IP address under IISNode</title>
+      <link>https://nigel-wei-zhe.github.io/posts/unable-to-retrieve-a-connections-remote-ip-address-under-iisnode/</link>
+      <pubDate>Fri, 08 Nov 2019 10:09:08 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/unable-to-retrieve-a-connections-remote-ip-address-under-iisnode/</guid>
+      <description>狀況  在 IIS 底下安裝 IISNode 模組，並在後端架設一個 Node.exe 要在 Node.exe 上獲取遠端連接的IP位址會失敗。 因為 IISNode 像是一個 reverse proxy 多個源頭進來，但 Node.exe 只會看到一個位址 就是 IISNode 所有的 client 連進來都看不到。 另外 IISNode 與 Node.exe 之間的連接是走命名的方式，不是走 TCP，所以在 Node.exe 無法取到 IP address
+解決  在 IISNode 的 web.config 上添加
+&amp;lt;configuration&amp;gt; &amp;lt;system.webServer&amp;gt; &amp;lt;!-- ... --&amp;gt; &amp;lt;iisnode enableXFF=&amp;quot;true&amp;quot; /&amp;gt; &amp;lt;/system.webServer&amp;gt; &amp;lt;/configuration&amp;gt;  這樣 client 連進來 IISNode 要拋給 Node.exe 就會添加 一個 X-Forwarded-For request header 把外部進來 IP　再傳遞下去
+const http = require(&#39;http&#39;) http.</description>
+    </item>
+    
+    <item>
+      <title>Vee-Validate v3.0.11</title>
+      <link>https://nigel-wei-zhe.github.io/posts/veevalidate/</link>
+      <pubDate>Tue, 29 Oct 2019 16:11:36 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/veevalidate/</guid>
+      <description>介紹   利用Vue.js基礎模板來驗證表單的模組，內建一些驗證規則，也可自行新增
+ 設置  安裝:
+ npm
+ npm install vee-validate --save   CDN
+ &amp;lt;!-- jsdelivr cdn --&amp;gt; &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;!-- unpkg --&amp;gt; &amp;lt;script src=&amp;quot;https://unpkg.com/vee-validate@latest&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  套用:
+ 所有規則套用中文訊息
+ import { ValidationProvider, ValidationObserver, extend } from &#39;vee-validate&#39; import * as rules from &#39;vee-validate/dist/rules&#39; import tw from &#39;vee-validate/dist/locale/zh_TW&#39; for (let rule in rules) { extend(rule, { ...rules[rule], // add the rule message: tw.messages[rule] // 把 message 加進去並中文化 }) } extend(&#39;telRegExp&#39;, { validate: value =&amp;gt; { const reg = /^09\d{8}$/ return reg.</description>
+    </item>
+    
+    <item>
+      <title>LocalStorage</title>
+      <link>https://nigel-wei-zhe.github.io/posts/localstorage/</link>
+      <pubDate>Thu, 24 Oct 2019 16:08:57 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/localstorage/</guid>
+      <description>介紹  Web Storage 為 HTML5 標準中新加入的技術 主要分兩種一個是
+sessionStorage
+ 放在sessionStorage的資料會在頁面(頁籤)關閉時清空，只要該頁面頁面(頁籤)沒被關閉或者有還原(restore)該頁面，資料就會保存。
+ localStorage
+ 放在localStorage的資料會永久保存，直到被使用者清除。
+ 早期瀏覽器要儲存暫存的資料會使用 cookie，而不管你使用哪個暫存你網頁的資料都要注意該筆資料是否敏感數據，因為只要打開控制台，你就隨意修改它們的值，而有心人士就可以利用此方式來做 XSS 攻擊
+支援  web storage method  更新 Storage
+Storage.setItem(&#39;key&#39;, &#39;value&#39;)  or
+Storage.&#39;key&#39; = &#39;value&#39;  指定物件屬性的 key 以及 value ， 我們可以在 storage 物件中加入屬性或修改原本的屬性內容
+讀取 Storage
+Storage.getItem(&#39;key&#39;)  輸入屬性的 key ，我們可以得到 storage 物件對應的屬性 value
+刪除 Storage
+Storage.removeItem(&#39;key&#39;)  把指定的屬性從storage 物件中移除
+刪除 全部 Storage
+Storage.clear()  把storage 中的所有屬性移除</description>
+    </item>
+    
+    <item>
+      <title>Unix timestamp</title>
+      <link>https://nigel-wei-zhe.github.io/posts/unix-timestamp/</link>
+      <pubDate>Wed, 23 Oct 2019 15:16:39 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/unix-timestamp/</guid>
+      <description>簡介  Unix timestamp (時間戳) 是指至格林威治時間 1970年01月01日00时00分00秒起 到現在的&amp;quot;總秒數&amp;quot;
+javascript 轉換   1572480000 &amp;ndash;&amp;gt; 2019-10-31 08:00:00 +0800  YYYY-MM-DD格式，使用主機時間
+function (timestamp = 1572480000) { const month = new Date(timestamp * 1000).getMonth() &amp;lt; 10 ? 0 + (new Date(timestamp * 1000).getMonth() + 1) : new Date(timestamp * 1000).getMonth() + 1 const date = new Date(timestamp * 1000).getDate() &amp;lt; 10 ? 0 + (new Date(timestamp * 1000).getDate()) : new Date(timestamp * 1000).getDate() const formatTime = `${new Date(timestamp * 1000).</description>
+    </item>
+    
+    <item>
+      <title>JavaScript Abbreviation</title>
+      <link>https://nigel-wei-zhe.github.io/posts/javascript-abbreviation/</link>
+      <pubDate>Sun, 20 Oct 2019 17:02:14 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/javascript-abbreviation/</guid>
+      <description>三元運算子  當要寫 if else 判斷式時 一般會寫成
+const a = 7 let result if (a &amp;gt; 0) { result = `a大於0` } else { result = `a小於0` }  簡寫
+let result = a &amp;gt; 0 ? `a大於0` : `a小於0`   短路求值  當宣告一個變數給值時，想確認不是 null, undefined, 空值時 可能會這樣寫
+if (a !== null || a !== undefined || a !== &#39;&#39;) { let b = a }  簡寫</description>
+    </item>
+    
+    <item>
+      <title>Build Express</title>
+      <link>https://nigel-wei-zhe.github.io/posts/express%E5%BB%BA%E7%BD%AE/</link>
+      <pubDate>Wed, 16 Oct 2019 14:12:25 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/express%E5%BB%BA%E7%BD%AE/</guid>
+      <description>#介紹 express是建立在node.js的http模組上，另外包裝，並提供 一些中介。
+不免俗 Hello world 範例:
+const express = require(&#39;express&#39;) const app = express() app.get(`/`, function (req, res) { res.send(`Hello World!`) }) app.listen(3000, function () { console.log(`Example app listening on port 3000!`) })  或者 可以直接用產生器
+全域安裝
+npm install express-generator -g  裝完透過
+express -h  可以看到
+Usage: express [options][dir] Options: -h, --help output usage information --version output the version number -e, --ejs add ejs engine support --hbs add handlebars engine support --pug add pug engine support -H, --hogan add hogan.</description>
+    </item>
+    
+    <item>
+      <title>V-if 注意資料載入的時間點</title>
+      <link>https://nigel-wei-zhe.github.io/posts/v-if-%E6%B3%A8%E6%84%8F%E8%B3%87%E6%96%99%E8%BC%89%E5%85%A5%E7%9A%84%E6%99%82%E9%96%93%E9%BB%9E/</link>
+      <pubDate>Mon, 14 Oct 2019 16:28:40 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/v-if-%E6%B3%A8%E6%84%8F%E8%B3%87%E6%96%99%E8%BC%89%E5%85%A5%E7%9A%84%E6%99%82%E9%96%93%E9%BB%9E/</guid>
+      <description>#狀況 Html:
+&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt; &amp;lt;h1 v-if=&amp;quot;testData.array.length &amp;gt; 0&amp;quot;&amp;gt; 如果陣列有值顯示出來 &amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt;  Js:
+new Vue ({ el: &#39;#app&#39;, data: { testData: &#39;&#39; }, created () { const vm = this vm.testData = { testArray: [ { msg: &#39;hi&#39; } ] } } })  這時候去看console 會報錯
+TypeError: Cannot read property &#39;length&#39; of undefined  就我的理解應該是一開始掛載 data 時，屬性建立時還沒有把 testArray 掛上去，當然也無法使用length
+#解決辦法 &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt; &amp;lt;h1 v-if=&amp;quot;testData.testArray &amp;amp;&amp;amp; testData.testArray.length &amp;gt; 0&amp;quot;&amp;gt; 如果陣列有值顯示出來 &amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt;  一開始就先檢查一次值是否存在，再執行後續動作</description>
+    </item>
+    
+    <item>
+      <title>Regular Expression</title>
+      <link>https://nigel-wei-zhe.github.io/posts/regular-expression/</link>
+      <pubDate>Tue, 08 Oct 2019 15:22:42 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/regular-expression/</guid>
+      <description>介紹  Regular Expression (RegExp) 正規表達式 用來判斷字串是否有符合格式 線上測試Reg格式的網址:https://regexr.com/
+RegExp宣告  以下用js示範 直接例項化:
+var reg = new RegExp(pattern [, flags])  隱式建立:
+var reg = /pattern/flags  pattern 是一個字串，填入正規表示式 flags 是一個可選的字串，包含屬性 &amp;lsquo;g&amp;rsquo;（global ）、&amp;lsquo;i&amp;rsquo; （ignoreCase）和 &amp;rsquo;m&amp;rsquo;（multiline）
+RegExp 物件方法  test: 檢索字串中是否存在指定的值。返回值是 true 或 false
+var reg = new RegExp(&#39;a&#39;) console.log(reg.test(&#39;abc&#39;)) OUTPUT: true  exec: 檢索字串中的指定值。返回值是被找到的值。如果沒有發現匹配，則返回 null
+var reg = new RegExp(&#39;a&#39;) console.log(reg.exec(&#39;abc&#39;)) OUTPUT: a  replace: 替換與正規表示式匹配的子串
+var str = &#39;hi&#39; console.log(str.replace(/hi/, &#39;yo&#39;)); OUTPUT: yo  範例     RegExp 說明 範例     /^09\d{8}$/ 手機號碼 &amp;ldquo;0912345678&amp;rdquo;   /^.</description>
+    </item>
+    
+    <item>
+      <title>使用github.io佈署自己的website&#34;</title>
+      <link>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/</link>
+      <pubDate>Sat, 05 Oct 2019 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/</guid>
+      <description>Github有提供可以呈現靜態檔案的伺服器 只有靜態檔案，所以動態網頁是無法呈現的
+使用方法如下:
+ 1.Create a repository
+前往 github 創一個新的 repository 名稱必須和使用者一樣 ( 使用者名稱/使用者名稱.github.io ) 舉例: Nigel-wei-zhe/Nigel-wei-zhe.github.io
+!!! 要設定為 Public !!!
+ 2.在本地端建立資料夾
+創好 repository 後 可以選擇在本地端clone一個資料夾或者自己創一個透過git指令上傳 這邊示範自己建資料夾git上傳
+首先在桌面創建一個資料夾 page 並在資料夾裡隨意新增一個 index.html 隨便寫點內容
+index.html:
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;I&#39;m hosted with GitHub Pages.&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt; 存檔
+接著透過上方路徑列開啟cmd
+C:\Users\Nigel\Desktop\page&amp;gt; 開始添加git指令:
+echo &amp;quot;# my first page&amp;quot; &amp;gt;&amp;gt; README.mdgit initgit add .git commit -m &amp;quot;first commit&amp;quot;git remote add origin https://github.</description>
+    </item>
+    
+    <item>
+      <title>Vue_Filter過濾器</title>
+      <link>https://nigel-wei-zhe.github.io/posts/vue_filter%E9%81%8E%E6%BF%BE%E5%99%A8/</link>
+      <pubDate>Fri, 04 Oct 2019 19:50:39 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/vue_filter%E9%81%8E%E6%BF%BE%E5%99%A8/</guid>
+      <description>用於處理一些頁面上資料的呈現
+用法: 值後面加上 | (pipe) 可以串入多個Filter，有順序之分(左至右)
+{{ value | A | B | C }}A 執行完 會B 再換 C 範例:
+替金額加上$，和千分位符號 程式碼如下
+&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;div&amp;gt;{{ price | currency }}&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;new Vue({el: &#39;#app&#39;,data: {price: 999999}filter: {currency (number) {const n = Number(number)return `$${n.toFixed(0).replace(/./g, (c, i, a) =&amp;gt; {const currency = (i &amp;amp;&amp;amp; c !== &#39;.&#39; &amp;amp;&amp;amp; ((a.length - i) % 3 === 0) ?</description>
+    </item>
+    
+    <item>
+      <title>使用Hugo</title>
+      <link>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/</link>
+      <pubDate>Thu, 03 Oct 2019 20:09:38 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/</guid>
+      <description>建置環境:Windows-64bit
+ 安裝Hugo 前往: https://github.com/gohugoio/hugo/releases
+下載對應的版本
+在 C:\ 底下建立 一個新資料夾 命名 Hugo 裡面再建立一個子資料夾 命名 bin
+把剛剛下載的檔案 全部解壓縮 放入 C:\Hugo\bin
+使用 CMD 下指令 確認版本號
+C:\Hugo\bin&amp;gt;hugo version 再去 控制台 -&amp;gt; 編輯系統環境變數
+環境變數 -&amp;gt; 使用者變數的 Path 把剛剛的
+C:\Hugo\bin 新增進去
+使用 CMD 去確認 有新增成功
+C:\&amp;gt;hugo version	 有跳出版本訊息 才算成功
+ 新增一個新的 Site 指令
+hugo new site [Site名稱] 線上選取一個主題: https://themes.gohugo.io/
+選取主題後，底下作者都有教怎麼安裝 請參考
+新增第一篇文章試試看
+指令
+hugo new posts/my-first-post.md 會在	\content\posts 找到我們新增的第一篇文章
+這時候下指令</description>
+    </item>
+    
+  </channel>
+</rss>

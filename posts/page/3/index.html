@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <link
+      href="/posts/index.xml"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    <link
+      href="/posts/index.xml"
+      rel="feed"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    
+
+    <title>Posts</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content"> 
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/veevalidate/">Vee-Validate v3.0.11</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>介紹   利用Vue.js基礎模板來驗證表單的模組，內建一些驗證規則，也可自行新增
+ 設置  安裝:
+ npm
+ npm install vee-validate --save   CDN
+ &lt;!-- jsdelivr cdn --&gt; &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js&quot;&gt;&lt;/script&gt; &lt;!-- unpkg --&gt; &lt;script src=&quot;https://unpkg.com/vee-validate@latest&quot;&gt;&lt;/script&gt;  套用:
+ 所有規則套用中文訊息
+ import { ValidationProvider, ValidationObserver, extend } from 'vee-validate' import * as rules from 'vee-validate/dist/rules' import tw from 'vee-validate/dist/locale/zh_TW' for (let rule in rules) { extend(rule, { ...rules[rule], // add the rule message: tw.messages[rule] // 把 message 加進去並中文化 }) } extend('telRegExp', { validate: value =&gt; { const reg = /^09\d{8}$/ return reg.  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">29. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/localstorage/">LocalStorage</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>介紹  Web Storage 為 HTML5 標準中新加入的技術 主要分兩種一個是
+sessionStorage
+ 放在sessionStorage的資料會在頁面(頁籤)關閉時清空，只要該頁面頁面(頁籤)沒被關閉或者有還原(restore)該頁面，資料就會保存。
+ localStorage
+ 放在localStorage的資料會永久保存，直到被使用者清除。
+ 早期瀏覽器要儲存暫存的資料會使用 cookie，而不管你使用哪個暫存你網頁的資料都要注意該筆資料是否敏感數據，因為只要打開控制台，你就隨意修改它們的值，而有心人士就可以利用此方式來做 XSS 攻擊
+支援  web storage method  更新 Storage
+Storage.setItem('key', 'value')  or
+Storage.'key' = 'value'  指定物件屬性的 key 以及 value ， 我們可以在 storage 物件中加入屬性或修改原本的屬性內容
+讀取 Storage
+Storage.getItem('key')  輸入屬性的 key ，我們可以得到 storage 物件對應的屬性 value
+刪除 Storage
+Storage.removeItem('key')  把指定的屬性從storage 物件中移除
+刪除 全部 Storage
+Storage.clear()  把storage 中的所有屬性移除 </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">24. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/unix-timestamp/">Unix timestamp</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>簡介  Unix timestamp (時間戳) 是指至格林威治時間 1970年01月01日00时00分00秒起 到現在的&quot;總秒數&quot;
+javascript 轉換   1572480000 &ndash;&gt; 2019-10-31 08:00:00 +0800  YYYY-MM-DD格式，使用主機時間
+function (timestamp = 1572480000) { const month = new Date(timestamp * 1000).getMonth() &lt; 10 ? 0 + (new Date(timestamp * 1000).getMonth() + 1) : new Date(timestamp * 1000).getMonth() + 1 const date = new Date(timestamp * 1000).getDate() &lt; 10 ? 0 + (new Date(timestamp * 1000).getDate()) : new Date(timestamp * 1000).getDate() const formatTime = `${new Date(timestamp * 1000).  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">23. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/javascript-abbreviation/">JavaScript Abbreviation</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>三元運算子  當要寫 if else 判斷式時 一般會寫成
+const a = 7 let result if (a &gt; 0) { result = `a大於0` } else { result = `a小於0` }  簡寫
+let result = a &gt; 0 ? `a大於0` : `a小於0`   短路求值  當宣告一個變數給值時，想確認不是 null, undefined, 空值時 可能會這樣寫
+if (a !== null || a !== undefined || a !== '') { let b = a }  簡寫  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">20. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/express%E5%BB%BA%E7%BD%AE/">Build Express</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>#介紹 express是建立在node.js的http模組上，另外包裝，並提供 一些中介。
+不免俗 Hello world 範例:
+const express = require('express') const app = express() app.get(`/`, function (req, res) { res.send(`Hello World!`) }) app.listen(3000, function () { console.log(`Example app listening on port 3000!`) })  或者 可以直接用產生器
+全域安裝
+npm install express-generator -g  裝完透過
+express -h  可以看到
+Usage: express [options][dir] Options: -h, --help output usage information --version output the version number -e, --ejs add ejs engine support --hbs add handlebars engine support --pug add pug engine support -H, --hogan add hogan.  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">16. October 2019</span>
+  </p>
+</article>
+ 
+	<nav class="pagination" role="pagination">
+		
+			<a class="newer-posts" href="/posts/page/2/"><span aria-hidden="true">&larr;</span> Newer Posts</a>
+		
+		<span class="page-number">Page 3 of 4</span>
+		
+			<a class="older-posts" href="/posts/page/4/">Older Posts <span aria-hidden="true">&rarr;</span></a>
+		
+	</nav>
+
+ </div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Vee-Validate v3.0.11</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/veevalidate/">Vee-Validate v3.0.11</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="介紹">介紹</h1>
+<hr>
+<blockquote>
+<p>利用Vue.js基礎模板來驗證表單的模組，內建一些驗證規則，也可自行新增</p>
+</blockquote>
+<h1 id="設置">設置</h1>
+<hr>
+<p><strong>安裝</strong>:</p>
+<blockquote>
+<p>npm</p>
+</blockquote>
+<pre><code>npm install vee-validate --save
+</code></pre>
+<blockquote>
+<p>CDN</p>
+</blockquote>
+<pre><code>&lt;!-- jsdelivr cdn --&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js&quot;&gt;&lt;/script&gt;
+&lt;!-- unpkg --&gt;
+&lt;script src=&quot;https://unpkg.com/vee-validate@latest&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p><strong>套用</strong>:</p>
+<blockquote>
+<p>所有規則套用中文訊息</p>
+</blockquote>
+<pre><code>import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import * as rules from 'vee-validate/dist/rules'
+import tw from 'vee-validate/dist/locale/zh_TW'
+
+for (let rule in rules) {
+  extend(rule, {
+    ...rules[rule], // add the rule
+    message: tw.messages[rule] // 把 message 加進去並中文化
+  })
+}
+
+extend('telRegExp', {
+  validate: value =&gt; {
+  const reg = /^09\d{8}$/
+  return reg.test(value)
+  },
+  message: '手機號碼 格式錯誤'
+}) // 自訂手機號碼規則
+
+Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver)
+</code></pre>
+<blockquote>
+<p>使用 ValidationProvider 包裝 inputs</p>
+</blockquote>
+<pre><code>&lt;validation-provider rules=&quot;required&quot; v-slot=&quot;{ errors }&quot;&gt;
+	&lt;input v-model=&quot;value&quot; name=&quot;myinput&quot; type=&quot;text&quot; /&gt;
+	&lt;span&gt;{{ errors[0] }}&lt;/span&gt;
+&lt;/validation-provider&gt;
+</code></pre>
+<h1 id="使用驗證">使用驗證</h1>
+<hr>
+<p><strong>內建規則</strong></p>
+<pre><code>&quot;alpha&quot;: &quot;{_field_} 須以英文組成&quot;,
+&quot;alpha_dash&quot;: &quot;{_field_} 須以英數、斜線及底線組成&quot;,
+&quot;alpha_num&quot;: &quot;{_field_} 須以英數組成&quot;,
+&quot;alpha_spaces&quot;: &quot;{_field_} 須以英文及空格組成&quot;,
+&quot;between&quot;: &quot;{_field_} 須介於 {min} 至 {max}之間&quot;,
+&quot;confirmed&quot;: &quot; {_field_} 不一致&quot;,
+&quot;digits&quot;: &quot;{_field_} 須為 {length} 位數字&quot;,
+&quot;dimensions&quot;: &quot;{_field_} 圖片尺寸不正確。須為 {width} x {height} 像素&quot;,
+&quot;email&quot;: &quot;{_field_} 須為有效的電子信箱&quot;,
+&quot;excluded&quot;: &quot;{_field_} 的選項無效&quot;,
+&quot;ext&quot;: &quot;{_field_} 須為有效的檔案&quot;,
+&quot;image&quot;: &quot;{_field_} 須為圖片&quot;,
+&quot;oneOf&quot;: &quot;{_field_} 的選項無效&quot;,
+&quot;integer&quot;: &quot;{_field_} 須為整數&quot;,
+&quot;length&quot;: &quot;{_field_} 的長度須為 {length}&quot;,
+&quot;max&quot;: &quot;{_field_} 不能大於 {length} 個字元&quot;,
+&quot;max_value&quot;: &quot;{_field_} 不得大於 {max}&quot;,
+&quot;mimes&quot;: &quot;{_field_} 須為有效的檔案類型&quot;,
+&quot;min&quot;: &quot;{_field_} 不能小於 {length} 個字元&quot;,
+&quot;min_value&quot;: &quot;{_field_} 不得小於 {min}&quot;,
+&quot;numeric&quot;: &quot;{_field_} 須為數字&quot;,
+&quot;regex&quot;: &quot;{_field_} 的格式錯誤&quot;,
+&quot;required&quot;: &quot;{_field_} 為必填&quot;,
+&quot;required_if&quot;: &quot;{_field_} 為必填&quot;,
+&quot;size&quot;: &quot;{_field_} 的檔案須小於 {size}KB&quot;
+</code></pre>
+<p><strong>用法</strong></p>
+<blockquote>
+<p>在 ValidationProvider 中添加 rules 屬性後面添加驗證規則，v-slot會把結果傳出來 <a href="https://logaretm.github.io/vee-validate/guide/validation-provider.html#scoped-slot-data">關於 Scoped Slot Data</a></p>
+</blockquote>
+<pre><code>&lt;ValidationProvider rules=&quot;required|email&quot; v-slot=&quot;{ errors }&quot;&gt;&lt;/ValidationProvider&gt;
+</code></pre>
+<blockquote>
+<p>有些規則直接套用屬姓名就好，有些是後面需要帶參數的</p>
+</blockquote>
+<pre><code>&lt;ValidationProvider rules=&quot;required|min:3&quot; v-slot=&quot;{ errors }&quot;&gt;&lt;/ValidationProvider&gt;
+&lt;ValidationProvider rules=&quot;required|between:3,10&quot; v-slot=&quot;{ errors }&quot;&gt;&lt;/ValidationProvider&gt;
+&lt;ValidationProvider rules=&quot;required|oneOf:coffee,tea,beer,milk&quot; v-slot=&quot;{ errors }&quot;&gt;&lt;/ValidationProvider&gt;
+</code></pre>
+<h1 id="validationprovider-與-validationobserver">ValidationProvider 與 ValidationObserver</h1>
+<hr>
+<p><strong>ValidationProvider</strong>:</p>
+<blockquote>
+<p>比較針對 每一個單一 input 去做驗證</p>
+</blockquote>
+<p><strong>ValidationObserver</strong>:</p>
+<blockquote>
+<p>對整張表單，檢查每一項input 是否都通過驗證</p>
+</blockquote>
+<p>範例:</p>
+<pre><code>&lt;template&gt;
+  &lt;ValidationObserver ref=&quot;observer&quot; v-slot=&quot;{ invalid }&quot; tag=&quot;form&quot; @submit.prevent=&quot;submit()&quot;&gt;
+    &lt;TextFieldWithValidation rules=&quot;required&quot; v-model=&quot;first&quot; /&gt;
+
+    &lt;TextFieldWithValidation rules=&quot;required&quot; v-model=&quot;second&quot; /&gt;
+
+    &lt;button :disabled=&quot;invalid&quot;&gt;Submit&lt;/button&gt;
+  &lt;/ValidationObserver&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  methods: {
+    async submit() {
+      const isValid = await this.$refs.observer.validate();
+      if (!isValid) {
+        // ABORT!!
+      }
+
+      // 🐿 ship it
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre>
+<h1 id="參考連結">參考連結</h1>
+<hr>
+<ul>
+<li><a href="https://logaretm.github.io/vee-validate/guide/">VeeValidate官網</a></li>
+<li><a href="https://www.kabanoki.net/4955/">カバの樹</a></li>
+</ul>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">29. October 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Unix timestamp</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/unix-timestamp/">Unix timestamp</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="簡介">簡介</h1>
+<hr>
+<p>Unix timestamp (時間戳) 是指至格林威治時間 1970年01月01日00时00分00秒起
+到現在的&quot;總秒數&quot;</p>
+<h1 id="javascript-轉換">javascript 轉換</h1>
+<hr>
+<ol>
+<li>1572480000 &ndash;&gt; 2019-10-31 08:00:00 +0800</li>
+</ol>
+<p>YYYY-MM-DD格式，使用主機時間</p>
+<pre><code>function (timestamp = 1572480000) {
+  const month = new Date(timestamp * 1000).getMonth() &lt; 10 ? 0 + (new Date(timestamp * 1000).getMonth() + 1) : new Date(timestamp * 1000).getMonth() + 1
+  const date = new Date(timestamp * 1000).getDate() &lt; 10 ? 0 + (new Date(timestamp * 1000).getDate()) : new Date(timestamp * 1000).getDate()
+  const formatTime = `${new Date(timestamp * 1000).getFullYear()}-${month}-${date}`
+  return formatTime
+}
+</code></pre>
+<ol start="2">
+<li>2019-10-31 08:00:00 +0800 &ndash;&gt; 1572480000</li>
+</ol>
+<p>使用主機時間</p>
+<pre><code>function () {
+  const timestamp = new Date('2019-10-31 08:00:00 +0800').getTime()
+  const result = Math.floor(timestamp / 1000)
+}
+</code></pre>
+<h1 id="補充">補充</h1>
+<hr>
+<pre><code>new Date('2019-10-31 00:00:00 +0000') // 有寫時區的話，會以給定時區的時間，回傳當地時區的時間
+new Date('2019-10-31')                // 沒寫時間的話，會以 UTC（+0）的 00:00 為時間，回傳當地時區的時間
+</code></pre>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">23. October 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

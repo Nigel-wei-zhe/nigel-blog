@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Vue_Filter過濾器</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/vue_filter%E9%81%8E%E6%BF%BE%E5%99%A8/">Vue_Filter過濾器</a> 
+  </h1>
+
+  <div class="post-content"><p>用於處理一些頁面上資料的呈現</p>
+<p>用法:  值後面加上 | (pipe) 可以串入多個Filter，有順序之分(左至右)</p>
+<pre><code>{{ value | A | B | C }}
+
+A 執行完 會B 再換 C
+</code></pre>
+<p>範例:</p>
+<p>替金額加上$，和千分位符號  程式碼如下</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+	&lt;div&gt;{{ price | currency }}&lt;/div&gt;
+&lt;/div&gt;
+
+
+new Vue({
+	el: '#app',
+	data: {
+		price: 999999
+	}
+	filter: {
+	  currency (number) {
+	  	const n = Number(number)
+	  	return `$${n.toFixed(0).replace(/./g, (c, i, a) =&gt; {
+		  const currency = (i &amp;&amp; c !== '.' &amp;&amp; ((a.length - i) % 3 === 0) ? `, ${c}`.replace(/\s/g, '') : c);
+		  return currency
+		})}`
+	  },
+	  priceFormat (value) {
+	  	return `$${value}`
+	  }
+	},
+})
+</code></pre>
+<p>也可以套用在 V-bind</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+	&lt;div :data-value=&quot;value | A | B | C&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>使用 Vue.Filter() 全域註冊</p>
+<p>Vue.Filter(&lsquo;自訂名稱&rsquo;, 執行的函式)</p>
+<p>範例:</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+	&lt;div&gt;{{ msg | test('hi') }}&lt;/div&gt;
+&lt;/div&gt;
+
+Vue.Filter('test', function (value, arg) {
+  return `${value}~${arg}`
+})
+new Vue({
+  el: '#app',
+  data: {
+  	msg: 'Nigel'
+  }
+})
+
+顯示: Nigel~hi
+</code></pre>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">04. October 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

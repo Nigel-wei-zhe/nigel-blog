@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>html5 on Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/tags/html5/</link>
+    <description>Recent content in html5 on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 15 Jan 2020 11:11:40 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/tags/html5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTTP - cache</title>
+      <link>https://nigel-wei-zhe.github.io/posts/http-cache/</link>
+      <pubDate>Wed, 15 Jan 2020 11:11:40 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/http-cache/</guid>
+      <description>序  快取(cache)，聽過也大概知道有甚麼作用，但其中的原理還有 Header 中的一些相關配置就不是這麼的了解 所以整理了一下資料讓自己更清楚。
+快取(Cache) 是甚麼  今天要瀏覽一個網頁，流程會是這樣
+ 瀏覽器 &amp;ndash; 請求 &amp;ndash;&amp;gt; 伺服器 &amp;ndash; 提供HTML、images&amp;hellip;等相關資源 &amp;ndash;&amp;gt; 瀏覽器
+ 所以每次想要瀏覽一個網頁，就要從網頁伺服器，下載頁面、 圖片等等&amp;hellip;的資源，假設今天那個網頁不常更新，內容其實都一樣，這樣每次下載一樣的東西，流量不就是浪費了嗎? 這時候 快取(Cache) 就派上用場了。
+快取(Cache) 就是把比較不常變動的資源儲存起來在瀏覽器的快取中，當使用者今天要拜訪這個網頁時，就能快速把資料取出來。 可以節省流量，也因為不用再下載，也可以節省時間。
+Expires  那麼要怎麼讓瀏覽器知道，這個頁面要快取呢? 可以在 HTTP Response Header 裡面添加 Expires Expires 是 HTTP 1.0 的 Header
+Expires: Tue, 12 Jan 2021 14:41:30 GMT 瀏覽器收到這個Response，就會把資源快取下來，當下一次瀏覽器要再次瀏覽這個網頁，瀏覽器會檢查自己本身的時間，去比對是否有過期，超過 Expires 的時間，如果沒有超過，瀏覽器就不會發送 Request ，直接從 快取 中拿取資料。
+那麼會有一個問題，瀏覽器比對是根據自己本身的時間，假設自己本身時間被改過，那麼就會失準。
+Cache-Control: max-age  為了解決這個問題 HTTP 1.1 堆出了 新的 Header，用法如下
+Cache-Control: max-age=10 意思是這個請求的到期時間是10秒，在10秒之內重新整理，都是從快取裡面拿資料，超過10秒之後，才會重新送新的 Request。</description>
+    </item>
+    
+    <item>
+      <title>LocalStorage</title>
+      <link>https://nigel-wei-zhe.github.io/posts/localstorage/</link>
+      <pubDate>Thu, 24 Oct 2019 16:08:57 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/localstorage/</guid>
+      <description>介紹  Web Storage 為 HTML5 標準中新加入的技術 主要分兩種一個是
+sessionStorage
+ 放在sessionStorage的資料會在頁面(頁籤)關閉時清空，只要該頁面頁面(頁籤)沒被關閉或者有還原(restore)該頁面，資料就會保存。
+ localStorage
+ 放在localStorage的資料會永久保存，直到被使用者清除。
+ 早期瀏覽器要儲存暫存的資料會使用 cookie，而不管你使用哪個暫存你網頁的資料都要注意該筆資料是否敏感數據，因為只要打開控制台，你就隨意修改它們的值，而有心人士就可以利用此方式來做 XSS 攻擊
+支援  web storage method  更新 Storage
+Storage.setItem(&#39;key&#39;, &#39;value&#39;)  or
+Storage.&#39;key&#39; = &#39;value&#39;  指定物件屬性的 key 以及 value ， 我們可以在 storage 物件中加入屬性或修改原本的屬性內容
+讀取 Storage
+Storage.getItem(&#39;key&#39;)  輸入屬性的 key ，我們可以得到 storage 物件對應的屬性 value
+刪除 Storage
+Storage.removeItem(&#39;key&#39;)  把指定的屬性從storage 物件中移除
+刪除 全部 Storage
+Storage.clear()  把storage 中的所有屬性移除</description>
+    </item>
+    
+    <item>
+      <title>使用Hugo</title>
+      <link>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/</link>
+      <pubDate>Thu, 03 Oct 2019 20:09:38 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/</guid>
+      <description>建置環境:Windows-64bit
+ 安裝Hugo 前往: https://github.com/gohugoio/hugo/releases
+下載對應的版本
+在 C:\ 底下建立 一個新資料夾 命名 Hugo 裡面再建立一個子資料夾 命名 bin
+把剛剛下載的檔案 全部解壓縮 放入 C:\Hugo\bin
+使用 CMD 下指令 確認版本號
+C:\Hugo\bin&amp;gt;hugo version 再去 控制台 -&amp;gt; 編輯系統環境變數
+環境變數 -&amp;gt; 使用者變數的 Path 把剛剛的
+C:\Hugo\bin 新增進去
+使用 CMD 去確認 有新增成功
+C:\&amp;gt;hugo version	 有跳出版本訊息 才算成功
+ 新增一個新的 Site 指令
+hugo new site [Site名稱] 線上選取一個主題: https://themes.gohugo.io/
+選取主題後，底下作者都有教怎麼安裝 請參考
+新增第一篇文章試試看
+指令
+hugo new posts/my-first-post.md 會在	\content\posts 找到我們新增的第一篇文章
+這時候下指令</description>
+    </item>
+    
+  </channel>
+</rss>

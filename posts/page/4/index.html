@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <link
+      href="/posts/index.xml"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    <link
+      href="/posts/index.xml"
+      rel="feed"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    
+
+    <title>Posts</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content"> 
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/v-if-%E6%B3%A8%E6%84%8F%E8%B3%87%E6%96%99%E8%BC%89%E5%85%A5%E7%9A%84%E6%99%82%E9%96%93%E9%BB%9E/">V-if 注意資料載入的時間點</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>#狀況 Html:
+&lt;div id=&quot;app&quot;&gt; &lt;h1 v-if=&quot;testData.array.length &gt; 0&quot;&gt; 如果陣列有值顯示出來 &lt;/h1&gt; &lt;/div&gt;  Js:
+new Vue ({ el: '#app', data: { testData: '' }, created () { const vm = this vm.testData = { testArray: [ { msg: 'hi' } ] } } })  這時候去看console 會報錯
+TypeError: Cannot read property 'length' of undefined  就我的理解應該是一開始掛載 data 時，屬性建立時還沒有把 testArray 掛上去，當然也無法使用length
+#解決辦法 &lt;div id=&quot;app&quot;&gt; &lt;h1 v-if=&quot;testData.testArray &amp;&amp; testData.testArray.length &gt; 0&quot;&gt; 如果陣列有值顯示出來 &lt;/h1&gt; &lt;/div&gt;  一開始就先檢查一次值是否存在，再執行後續動作  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">14. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/regular-expression/">Regular Expression</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>介紹  Regular Expression (RegExp) 正規表達式 用來判斷字串是否有符合格式 線上測試Reg格式的網址:https://regexr.com/
+RegExp宣告  以下用js示範 直接例項化:
+var reg = new RegExp(pattern [, flags])  隱式建立:
+var reg = /pattern/flags  pattern 是一個字串，填入正規表示式 flags 是一個可選的字串，包含屬性 &lsquo;g&rsquo;（global ）、&lsquo;i&rsquo; （ignoreCase）和 &rsquo;m&rsquo;（multiline）
+RegExp 物件方法  test: 檢索字串中是否存在指定的值。返回值是 true 或 false
+var reg = new RegExp('a') console.log(reg.test('abc')) OUTPUT: true  exec: 檢索字串中的指定值。返回值是被找到的值。如果沒有發現匹配，則返回 null
+var reg = new RegExp('a') console.log(reg.exec('abc')) OUTPUT: a  replace: 替換與正規表示式匹配的子串
+var str = 'hi' console.log(str.replace(/hi/, 'yo')); OUTPUT: yo  範例     RegExp 說明 範例     /^09\d{8}$/ 手機號碼 &ldquo;0912345678&rdquo;   /^.  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">08. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/">使用github.io佈署自己的website&#34;</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>Github有提供可以呈現靜態檔案的伺服器 只有靜態檔案，所以動態網頁是無法呈現的
+使用方法如下:
+ 1.Create a repository
+前往 github 創一個新的 repository 名稱必須和使用者一樣 ( 使用者名稱/使用者名稱.github.io ) 舉例: Nigel-wei-zhe/Nigel-wei-zhe.github.io
+!!! 要設定為 Public !!!
+ 2.在本地端建立資料夾
+創好 repository 後 可以選擇在本地端clone一個資料夾或者自己創一個透過git指令上傳 這邊示範自己建資料夾git上傳
+首先在桌面創建一個資料夾 page 並在資料夾裡隨意新增一個 index.html 隨便寫點內容
+index.html:
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;I'm hosted with GitHub Pages.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt; 存檔
+接著透過上方路徑列開啟cmd
+C:\Users\Nigel\Desktop\page&gt; 開始添加git指令:
+echo &quot;# my first page&quot; &gt;&gt; README.mdgit initgit add .git commit -m &quot;first commit&quot;git remote add origin https://github.  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">05. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/vue_filter%E9%81%8E%E6%BF%BE%E5%99%A8/">Vue_Filter過濾器</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>用於處理一些頁面上資料的呈現
+用法: 值後面加上 | (pipe) 可以串入多個Filter，有順序之分(左至右)
+{{ value | A | B | C }}A 執行完 會B 再換 C 範例:
+替金額加上$，和千分位符號 程式碼如下
+&lt;div id=&quot;app&quot;&gt;&lt;div&gt;{{ price | currency }}&lt;/div&gt;&lt;/div&gt;new Vue({el: '#app',data: {price: 999999}filter: {currency (number) {const n = Number(number)return `$${n.toFixed(0).replace(/./g, (c, i, a) =&gt; {const currency = (i &amp;&amp; c !== '.' &amp;&amp; ((a.length - i) % 3 === 0) ?  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">04. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/">使用Hugo</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>建置環境:Windows-64bit
+ 安裝Hugo 前往: https://github.com/gohugoio/hugo/releases
+下載對應的版本
+在 C:\ 底下建立 一個新資料夾 命名 Hugo 裡面再建立一個子資料夾 命名 bin
+把剛剛下載的檔案 全部解壓縮 放入 C:\Hugo\bin
+使用 CMD 下指令 確認版本號
+C:\Hugo\bin&gt;hugo version 再去 控制台 -&gt; 編輯系統環境變數
+環境變數 -&gt; 使用者變數的 Path 把剛剛的
+C:\Hugo\bin 新增進去
+使用 CMD 去確認 有新增成功
+C:\&gt;hugo version	 有跳出版本訊息 才算成功
+ 新增一個新的 Site 指令
+hugo new site [Site名稱] 線上選取一個主題: https://themes.gohugo.io/
+選取主題後，底下作者都有教怎麼安裝 請參考
+新增第一篇文章試試看
+指令
+hugo new posts/my-first-post.md 會在	\content\posts 找到我們新增的第一篇文章
+這時候下指令  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">03. October 2019</span>
+  </p>
+</article>
+ 
+	<nav class="pagination" role="pagination">
+		
+			<a class="newer-posts" href="/posts/page/3/"><span aria-hidden="true">&larr;</span> Newer Posts</a>
+		
+		<span class="page-number">Page 4 of 4</span>
+		
+	</nav>
+
+ </div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

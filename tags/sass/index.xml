@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sass on Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/tags/sass/</link>
+    <description>Recent content in sass on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 25 Dec 2019 15:47:49 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/tags/sass/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flexbox 屬性</title>
+      <link>https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/</link>
+      <pubDate>Wed, 25 Dec 2019 15:47:49 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/</guid>
+      <description>display: flex flex: 主要是 main axis 與 cross axis 構成
+main axis &amp;gt; 左右向
+cross axis &amp;gt; 上下向
+那麼有一些設定屬性，如下。
+flex-direction  設定主軸 (main axis) 的方向
+ .container {display: flex;flex-direction: row; // 橫向flex-direction: row-reverse; // 橫向，反序排列flex-direction: column; // 主軸變直向flex-direction: column-reverse; // 主軸變直向, 反序排列} justify-content  與主軸 (main axis) 的對齊方式
+ .container {display: flex;justify-content: flex-start; // 靠左justify-content: flex-end; // 靠右justify-content: center; // 置中justify-content: space-between; // 貼齊父容器，每個子元素的間格一致justify-content: space-around; // 與父容器的間格為，每個元素間格的一半justify-content: space-evenly; // 每個元素與父容器都是相同的間格} align-items  交叉軸 (cross axis) 的對齊方式</description>
+    </item>
+    
+  </channel>
+</rss>

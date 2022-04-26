@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Flexbox 屬性</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/">Flexbox 屬性</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="display-flex">display: flex</h1>
+<p>flex: 主要是 main axis 與 cross axis 構成</p>
+<p>main axis  &gt; 左右向</p>
+<p>cross axis &gt; 上下向</p>
+<p>那麼有一些設定屬性，如下。</p>
+<h2 id="flex-direction">flex-direction</h2>
+<blockquote>
+<p>設定主軸 (main axis) 的方向</p>
+</blockquote>
+<pre><code>.container {
+  display: flex;
+  flex-direction: row; // 橫向
+  flex-direction: row-reverse; // 橫向，反序排列
+  flex-direction: column; // 主軸變直向
+  flex-direction: column-reverse; // 主軸變直向, 反序排列
+}
+</code></pre>
+<h2 id="justify-content">justify-content</h2>
+<blockquote>
+<p>與主軸 (main axis) 的對齊方式</p>
+</blockquote>
+<pre><code>.container {
+  display: flex;
+  justify-content: flex-start; // 靠左
+  justify-content: flex-end; // 靠右
+  justify-content: center; // 置中
+  justify-content: space-between; // 貼齊父容器，每個子元素的間格一致
+  justify-content: space-around; // 與父容器的間格為，每個元素間格的一半
+  justify-content: space-evenly; // 每個元素與父容器都是相同的間格
+}
+</code></pre>
+<h2 id="align-items">align-items</h2>
+<blockquote>
+<p>交叉軸 (cross axis) 的對齊方式</p>
+</blockquote>
+<pre><code>.container {
+  display: flex;
+  align-items: flex-start; // 靠上
+  align-items: flex-end; // 靠下
+  align-items: stretch; // 填滿整個容器
+  align-items: baseline; // 依容器的基準線對齊
+  align-items: center; // 依容器的中線對齊
+}
+</code></pre>
+<p><strong>!!!注意!!!  align-items IE 只支援 11 (含)以上。</strong></p>
+<h2 id="align-self">align-self</h2>
+<blockquote>
+<p>設定單一元素的對齊方式，會覆寫父層align-items的設定</p>
+</blockquote>
+<pre><code>.container {
+  display: flex;
+  align-items: flex-end; //靠下
+  .item1 {
+	align-self: flex-start; // 只有這個 item1 靠上
+  }
+}
+</code></pre>
+<hr>
+<h1 id="參考資料">參考資料</h1>
+<p><a href="https://cythilya.github.io/2017/04/04/flexbox-basics/">Summer。桑莫。夏天 - 圖解 Flexbox 基本屬性</a></p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">25. December 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

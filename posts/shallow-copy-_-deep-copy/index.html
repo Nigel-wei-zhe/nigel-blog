@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Shallow Copy &amp; Deep Copy</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/shallow-copy-_-deep-copy/">Shallow Copy &amp; Deep Copy</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="data-type-型別">Data Type (型別)</h1>
+<hr>
+<p>首先在JS中,可分為 <strong>Primitive Type (基本型別)</strong> 跟 <strong>Non-Primitive Type (非基本型別)</strong></p>
+<ul>
+<li>Primitive: Number、 String、 Boolean、 Null、 Undefined</li>
+<li>Non-Primitive: Object、 Array、 Function、 Date、 Regx</li>
+</ul>
+<p>兩者差異在於，給值方式的不同</p>
+<p>那麼可以分為 <strong>By value (值)</strong>  跟  <strong>By reference (參考位置)</strong></p>
+<ol>
+<li>
+<p>Primitive Type 是 By value</p>
+<p>用 <strong>Number</strong> 舉例:</p>
+<pre><code> var a = 1
+ var b = a
+ b = 2
+
+ console.log(a); // Output: 1
+ console.log(b); // Output: 2
+
+ // 修改 b 時不會修改到 a
+</code></pre>
+</li>
+<li>
+<p>Non-Primitive Type 是 By reference</p>
+<p>用 <strong>物件(Object)</strong> 舉例:</p>
+<pre><code> var obj1 = { name: 'obj1', id: 123 }
+ var obj2 = obj1
+ obj2.name = 'obj2'
+
+ console.log(obj1); // Output: { neme: 'obj2', id: 123 }
+ console.log(obj2); // Output: { neme: 'obj2', id: 123 }
+
+ // 修改 obj2，把 obj1 也改了
+</code></pre>
+</li>
+</ol>
+<h1 id="shallow-copy-淺拷貝">Shallow Copy (淺拷貝)</h1>
+<hr>
+<p>那麼 Shallow Copy 指的就是上面那個情況，可以發現在修改 obj2 的時候，把 obj1 也改了。
+因為 var obj2 = obj1 只是把&quot;參考位置&quot;賦予給 obj2 ，兩個物件彼此是共用同一個&quot;參考位置&quot;，而位置都指向同一個&quot;值&quot;，
+當修改 obj2 時就會去&quot;參考位置&quot;把&quot;值&quot;替換掉，導致影響到原來的資料</p>
+<h1 id="deep-copy-深拷貝">Deep Copy (深拷貝)</h1>
+<hr>
+<p>所以在處理 Non-Primitive Type By reference 時，就要去賦予新的&quot;參考位置&quot;讓彼此不要相互影響
+具體作法可以採用ES6的函式<code>Object.assign()</code>，先建立一個空物件把所有屬性拷貝進去，會跟原始物件長的一模一樣，但參考位置是各自獨立的</p>
+<p>用上面例子修改</p>
+<pre><code>	var obj1 = { name: 'obj1', id: 123 }
+	var obj2 = Object.assign({}, obj1)
+	obj2.name = 'obj2'
+
+	console.log(obj1); // Output: { neme: 'obj1', id: 123 }
+	console.log(obj2); // Output: { neme: 'obj2', id: 123 }
+
+	// 修改 b 時，就沒有影響到 a 了
+</code></pre>
+<p>那麼要注意 <code>Object.assign()</code> 只能複製 &ldquo;第一層&rdquo; ，如果物件裡面的屬性中又包含一個物件，那麼就會漏掉</p>
+<pre><code>var obj1 = { name: 'obj1', id: 123, obj: { a: 0}}
+var obj2 = Object.assign({}, obj1)
+obj2.name = 'obj2'
+obj2.obj.a = 999;
+
+console.log(obj1); // { name: &quot;obj1&quot;, id: 123, obj: Object { a: 999 } }
+console.log(obj2); // { name: &quot;obj2&quot;, id: 123, obj: Object { a: 999 } }
+console.log(obj1 === obj2); // false
+console.log(obj1.obj === obj2.obj); // true
+</code></pre>
+<p>如果資料格式剛好是 <code>JSON </code> 格式就可以使用<code>JSON.stringify</code>把物件轉成字串，在使用<code>JSON.parse</code>把字串轉成新的物件，這樣就可以達成完全的<strong>Deep Copy</strong>，但前提是 <code>JSON </code> 格式</p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">18. December 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

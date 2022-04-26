@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vuejs on Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/tags/vuejs/</link>
+    <description>Recent content in vuejs on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Sun, 24 Nov 2019 16:08:57 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/tags/vuejs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>multer</title>
+      <link>https://nigel-wei-zhe.github.io/posts/multer/</link>
+      <pubDate>Sun, 24 Nov 2019 16:08:57 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/multer/</guid>
+      <description>介紹   Multer 是一個 node.js 的中間件，&amp;ldquo;只&amp;quot;用於處理 multipart/form-data 類型的數據，主要用於上傳
+ 安裝:
+npm install --save multer 參數  req.file 的屬性    Key Description Note     fieldname 表單上面的名稱    originalname 電腦上顯示的檔案名稱    encoding 編碼    mimetype 文件的mime 類型    size 文件大小 (位元組)    destination 路徑 DiskStorage   filename 保存在 destination 的名稱 DiskStorage   path 完整路徑 DiskStorage   buffer 存放檔案的內存 MemoryStorage    multer(opts) 的 opts    Key Description     dest or storage 存放位置   fileFilter 過濾 (函式)   limits 限制數據   preservePath 保存完整文件路徑     storage</description>
+    </item>
+    
+    <item>
+      <title>Vee-Validate v3.0.11</title>
+      <link>https://nigel-wei-zhe.github.io/posts/veevalidate/</link>
+      <pubDate>Tue, 29 Oct 2019 16:11:36 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/veevalidate/</guid>
+      <description>介紹   利用Vue.js基礎模板來驗證表單的模組，內建一些驗證規則，也可自行新增
+ 設置  安裝:
+ npm
+ npm install vee-validate --save   CDN
+ &amp;lt;!-- jsdelivr cdn --&amp;gt; &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;!-- unpkg --&amp;gt; &amp;lt;script src=&amp;quot;https://unpkg.com/vee-validate@latest&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  套用:
+ 所有規則套用中文訊息
+ import { ValidationProvider, ValidationObserver, extend } from &#39;vee-validate&#39; import * as rules from &#39;vee-validate/dist/rules&#39; import tw from &#39;vee-validate/dist/locale/zh_TW&#39; for (let rule in rules) { extend(rule, { ...rules[rule], // add the rule message: tw.messages[rule] // 把 message 加進去並中文化 }) } extend(&#39;telRegExp&#39;, { validate: value =&amp;gt; { const reg = /^09\d{8}$/ return reg.</description>
+    </item>
+    
+    <item>
+      <title>V-if 注意資料載入的時間點</title>
+      <link>https://nigel-wei-zhe.github.io/posts/v-if-%E6%B3%A8%E6%84%8F%E8%B3%87%E6%96%99%E8%BC%89%E5%85%A5%E7%9A%84%E6%99%82%E9%96%93%E9%BB%9E/</link>
+      <pubDate>Mon, 14 Oct 2019 16:28:40 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/v-if-%E6%B3%A8%E6%84%8F%E8%B3%87%E6%96%99%E8%BC%89%E5%85%A5%E7%9A%84%E6%99%82%E9%96%93%E9%BB%9E/</guid>
+      <description>#狀況 Html:
+&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt; &amp;lt;h1 v-if=&amp;quot;testData.array.length &amp;gt; 0&amp;quot;&amp;gt; 如果陣列有值顯示出來 &amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt;  Js:
+new Vue ({ el: &#39;#app&#39;, data: { testData: &#39;&#39; }, created () { const vm = this vm.testData = { testArray: [ { msg: &#39;hi&#39; } ] } } })  這時候去看console 會報錯
+TypeError: Cannot read property &#39;length&#39; of undefined  就我的理解應該是一開始掛載 data 時，屬性建立時還沒有把 testArray 掛上去，當然也無法使用length
+#解決辦法 &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt; &amp;lt;h1 v-if=&amp;quot;testData.testArray &amp;amp;&amp;amp; testData.testArray.length &amp;gt; 0&amp;quot;&amp;gt; 如果陣列有值顯示出來 &amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt;  一開始就先檢查一次值是否存在，再執行後續動作</description>
+    </item>
+    
+    <item>
+      <title>Vue_Filter過濾器</title>
+      <link>https://nigel-wei-zhe.github.io/posts/vue_filter%E9%81%8E%E6%BF%BE%E5%99%A8/</link>
+      <pubDate>Fri, 04 Oct 2019 19:50:39 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/vue_filter%E9%81%8E%E6%BF%BE%E5%99%A8/</guid>
+      <description>用於處理一些頁面上資料的呈現
+用法: 值後面加上 | (pipe) 可以串入多個Filter，有順序之分(左至右)
+{{ value | A | B | C }}A 執行完 會B 再換 C 範例:
+替金額加上$，和千分位符號 程式碼如下
+&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;div&amp;gt;{{ price | currency }}&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;new Vue({el: &#39;#app&#39;,data: {price: 999999}filter: {currency (number) {const n = Number(number)return `$${n.toFixed(0).replace(/./g, (c, i, a) =&amp;gt; {const currency = (i &amp;amp;&amp;amp; c !== &#39;.&#39; &amp;amp;&amp;amp; ((a.length - i) % 3 === 0) ?</description>
+    </item>
+    
+  </channel>
+</rss>

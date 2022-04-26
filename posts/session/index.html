@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Session</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/session/">Session</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="session-介紹">Session 介紹</h1>
+<hr>
+<p>HTTP協議上本身是&quot;無狀態&quot;的,就是單純的傳送、接收，無法紀錄使用者的一些資訊，
+所以 cookie 及 session 的這種機制就被發明出來了,那透一個情景來理解 Session
+今天一位客人進入一間餐廳，服務生會發給他一張會員卡，上面會有一組會員ID
+並在餐廳內部電腦記錄了，這個 ID 是哪位顧客持有的，並把基本資料 (姓名、電話) 跟這個 ID 綁定在一起
+當下次這位顧客來到餐廳，出示他的會員卡，服務生就能透過會員的ID去查客人的基本資料
+那麼 這裡面的 會員ID 就是 Session ID
+藉由這個機制，就可以擴充HTTP協議本身是無狀態，讓一些新的應用產生</p>
+<h1 id="express-session">express-session</h1>
+<hr>
+<p>NPM:</p>
+<pre><code>npm install express-session
+</code></pre>
+<p>Example:</p>
+<pre><code>var express = require('express')
+var session = require('express-session')
+
+app.use(session({
+  name: 'connect.sid' // 設置在cookie中,保存session的名稱,預設為'connect.sid'
+  store: ,// 默認存在內存中，可以改成 redis, mongodb 等
+  secret: 'keyboard cat', // 加密字串
+  resave: false, //每次請求要不要再重新發送 session 
+  saveUninitialized: true // 再沒有不論有沒有 session 每次請求都會發送 session cookie
+  cookie: { maxAge: 10 * 1000 } // 設定有效時間
+}))
+
+app.get('/', function(req, res, next) { 
+  var sess = req.session
+  if (sess.views) {
+	sess.views++
+	res.setHeader('Content-Type', 'text/html')
+	res.write('&lt;p&gt;views: ' + sess.views + '&lt;/p&gt;')
+	res.write('&lt;p&gt;expires in: ' + (sess.cookie.maxAge / 1000) + 's&lt;/p&gt;')
+	res.end()
+  } else {
+	sess.views = 1
+	res.end('welcome to the session demo. refresh!')
+  }
+})
+</code></pre>
+<h1 id="參考資料連結">參考資料連結</h1>
+<hr>
+<p><a href="https://yken919.pixnet.net/blog/post/45702341">session的介紹</a></p>
+<p><a href="https://wiki.jikexueyuan.com/project/node-lessons/cookie-session.html">express_cookie &amp; session</a></p>
+<p><a href="https://github.com/expressjs/session">express-session</a></p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">06. December 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

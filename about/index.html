@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <link
+      href="/about/index.xml"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    <link
+      href="/about/index.xml"
+      rel="feed"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    
+
+    <title>me</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<section class="timeline">
+  <ul>
+    <li>
+      <div>
+        <title>天堂遊戲有限公司 - FE</title>
+        <time>2020-03 ~ </time>
+        <p>- 彩票資訊站 ( Nuxt.js / Vant / SASS)</p>
+        <p>- 重構彩票後台 (Vue / Element UI )</p>
+        <p>- 交易撮合平台 ( Vue / Element UI / I18n )</p>
+        <p>- 第三方串接後台 ( Vue / FullCalendar / Echarts )</p>
+        <p>- 即時通信 IM ( Vue3 / WebSocket / Typescript )</p>
+        <p>- CI / CD調整 ( GitLab-CI / Docker / Nginx / Rancher )</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <title>黛寶拉股份有限公司 - MIS</title>
+        <time>2016-10 ~ 2020-02</time>
+        <p>- ERP維護</p>
+        <p>- Windows Server 2008 R2 環境建置與維護</p>
+        <p>- LINE Bot 串接 (Node.js - express)</p>
+        <p>- 會員服務網頁 ( Vue / Sass)</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <title>銘傳大學 - 電腦與通訊工程學系</title>
+        <title style="font-size: 0.2rem">
+          MCU - Department of Information and Telecommunications Engineering
+        </title>
+        <time>2011-09 ～ 2015-06</time>
+      </div>
+    </li>
+  </ul>
+</section>
+<script>
+  (function () {
+    "use strict";
+
+    
+    var items = document.querySelectorAll(".timeline li");
+
+    function isElementInViewport(el) {
+      var rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    function callbackFunc() {
+      for (var i = 0; i < items.length; i++) {
+        if (isElementInViewport(items[i])) {
+          items[i].classList.add("in-view");
+        }
+      }
+    }
+
+    
+    window.addEventListener("load", callbackFunc);
+    window.addEventListener("resize", callbackFunc);
+    window.addEventListener("scroll", callbackFunc);
+  })();
+</script>
+<style>
+  .timeline ul {
+    padding: 0px 0;
+    color: #839496;
+  }
+
+  .timeline ul li {
+    list-style-type: none;
+    position: relative;
+    width: 6px;
+    margin: 0;
+    padding-top: 15px;
+    background: #839496;
+  }
+   
+  .timeline ul li::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: inherit;
+    z-index: 1;
+  }
+   
+  .timeline ul li div {
+    position: relative;
+    bottom: 0;
+    width: 350px;
+    padding: 15px;
+    background: #002a35;
+    border-color: #839496;
+    border: 1px solid;
+  }
+   
+  .timeline ul li div::before {
+    content: "";
+    position: absolute;
+    bottom: 7px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .timeline ul li div {
+    left: 45px;
+  }
+
+  .timeline ul li div::before {
+    left: -15px;
+    border-width: 8px 16px 8px 0;
+    border-color: transparent #839496 transparent transparent;
+  }
+
+  title {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  time {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .in-view > div > p {
+    margin: 0;
+  }
+
+   
+
+  .timeline ul li::after {
+    transition: background 0.5s ease-in-out;
+  }
+
+  .timeline ul li.in-view::after {
+    background: #839496;
+  }
+
+  .timeline ul li div {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .timeline ul li:nth-child(odd) div {
+    transform: translate3d(200px, 0, 0);
+  }
+
+  .timeline ul li:nth-child(even) div {
+    transform: translate3d(-200px, 0, 0);
+  }
+
+  .timeline ul li.in-view div {
+    transform: none;
+    visibility: visible;
+    opacity: 1;
+  }
+
+   
+
+  @media screen and (max-width: 900px) {
+    .timeline ul li div {
+      width: 250px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .timeline ul li {
+      margin-left: 20px;
+    }
+    .timeline ul li div {
+      width: calc(100vw - 150px);
+    }
+    title {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .nav {
+      display: flex;
+      overflow-y: auto;
+    }
+    .nav-item {
+      padding: 0 20px;
+      text-align: right;
+    }
+  }
+
+   
+  .timeline-clippy ul li::after {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+  }
+
+  .timeline-rhombus ul li::after {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  .timeline-rhombus ul li div::before {
+    bottom: 12px;
+  }
+
+  .timeline-star ul li::after {
+    clip-path: polygon(
+      50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%
+    );
+  }
+
+  .timeline-heptagon ul li::after {
+    clip-path: polygon(
+      50% 0%,
+      90% 20%,
+      100% 60%,
+      75% 100%,
+      25% 100%,
+      0% 60%,
+      10% 20%
+    );
+  }
+
+  .timeline-infinite ul li::after {
+    animation: scaleAnimation 2s infinite;
+  }
+
+  @keyframes scaleAnimation {
+    0% {
+      transform: translateX(-50%) scale(1);
+    }
+    50% {
+      transform: translateX(-50%) scale(1.25);
+    }
+    100% {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+</style>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

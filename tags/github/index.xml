@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github on Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/tags/github/</link>
+    <description>Recent content in github on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 02 Jun 2021 17:28:06 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jest 學習筆記</title>
+      <link>https://nigel-wei-zhe.github.io/posts/testaxiosinjest/</link>
+      <pubDate>Wed, 02 Jun 2021 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/testaxiosinjest/</guid>
+      <description>How to test axios by jest 最近剛好在寫單元測試,看了些東西,有些眉眉角角,像是有函式在 Node.js 下並不支援,導致單元測試過不了。像是這篇 Jest: TypeError: replaceAll is not a function 
+ 那麼在寫單元測試時,有碰到 axios,所以就稍微查網路做功課,以下就列出看到的方法
+ 藉由 jest.mock 替換掉 axios  SUT: System Under Test 測試目標DOC: Depended-on Component 依賴組件情況是這樣,有時候 SUT 有太多的 DOC ,為了避免模糊焦點,讓測試邏輯相對單純,所以可以會把一些 相依的 DOC,採用 mock 替換掉, 讓測試不失焦。
+   import axios from &amp;#34;axios&amp;#34;  jest.mock(&amp;#34;axios&amp;#34;)  describe(&amp;#34;axios 流程&amp;#34;, () =&amp;gt; {  test(&amp;#34;success&amp;#34;, () =&amp;gt; {  const data = {  success: true  }  // 在axios.</description>
+    </item>
+    
+    <item>
+      <title>createElement 隨手記</title>
+      <link>https://nigel-wei-zhe.github.io/posts/createelement/</link>
+      <pubDate>Sat, 15 May 2021 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/createelement/</guid>
+      <description>關於 createElement Document.createElement()  創造一個元素,搭配其他 api 可以實現在指定的元素後,把創造出來的新元素添加上去
+ const title = document.createElement(&amp;#34;div&amp;#34;); title.innerText = &amp;#34;Hello world&amp;#34;; document.getElementsByTagName(&amp;#34;body&amp;#34;)[0].appendChild(title); vue createElement()  vue 製作 Virtual DOM 的函式,透過 render function 呼叫 createElement 來創造, 內部含有實現進行 diff 算法比較新舊 Virtual DOM 的差異,進而觸發渲染
+ Vue.component(&amp;#34;hello-world&amp;#34;, {  render(createElement) {  return createElement(&amp;#34;h1&amp;#34;, {  domProps: {  innerHTML: &amp;#34;Hello world&amp;#34;,  },  });  }, });  vue createElement() 應用  參數相關設定可以直接參考 官網。 直接舉個使用經驗,今天有一個需求是需要基於 vue 提供的 transition 的标签名進行加工 目的是想透過 transition 本身針對 enter 跟 leave 的相關事件,來實作收合</description>
+    </item>
+    
+    <item>
+      <title>Array.prototype.reduce 不只可以當作計數器</title>
+      <link>https://nigel-wei-zhe.github.io/posts/arrayprototypereduce/</link>
+      <pubDate>Thu, 08 Apr 2021 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/arrayprototypereduce/</guid>
+      <description>語法 array.reduce(  callback[(accumulator, currentValue, currentIndex, array)],  initialValue );  物件陣列轉 mapping 表 array.reduce((map, item) =&amp;gt; Object.assign(map, { [item.id]: item.name }), {}); 二維陣列轉一維 array.reduce((acc, cur) =&amp;gt; {  return acc.concat(cur); }, []); 統計陣列中元素出現次數 array.reduce((acc, cur) =&amp;gt; {  if (cur in acc) {  acc[cur] = 1;  } else {  acc[cur] += 1;  }  return acc; }, {}); 物件陣列依條件分類 array.reduce((acc, cur) =&amp;gt; {  if (!</description>
+    </item>
+    
+    <item>
+      <title>使用github.io佈署自己的website&#34;</title>
+      <link>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/</link>
+      <pubDate>Sat, 05 Oct 2019 17:28:06 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/</guid>
+      <description>Github有提供可以呈現靜態檔案的伺服器 只有靜態檔案，所以動態網頁是無法呈現的
+使用方法如下:
+ 1.Create a repository
+前往 github 創一個新的 repository 名稱必須和使用者一樣 ( 使用者名稱/使用者名稱.github.io ) 舉例: Nigel-wei-zhe/Nigel-wei-zhe.github.io
+!!! 要設定為 Public !!!
+ 2.在本地端建立資料夾
+創好 repository 後 可以選擇在本地端clone一個資料夾或者自己創一個透過git指令上傳 這邊示範自己建資料夾git上傳
+首先在桌面創建一個資料夾 page 並在資料夾裡隨意新增一個 index.html 隨便寫點內容
+index.html:
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;I&#39;m hosted with GitHub Pages.&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt; 存檔
+接著透過上方路徑列開啟cmd
+C:\Users\Nigel\Desktop\page&amp;gt; 開始添加git指令:
+echo &amp;quot;# my first page&amp;quot; &amp;gt;&amp;gt; README.mdgit initgit add .git commit -m &amp;quot;first commit&amp;quot;git remote add origin https://github.</description>
+    </item>
+    
+  </channel>
+</rss>

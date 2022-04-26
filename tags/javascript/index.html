@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <link
+      href="/tags/javascript/index.xml"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    <link
+      href="/tags/javascript/index.xml"
+      rel="feed"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    
+
+    <title>javascript</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content"> 
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/shallow-copy-_-deep-copy/">Shallow Copy &amp; Deep Copy</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>Data Type (型別)  首先在JS中,可分為 Primitive Type (基本型別) 跟 Non-Primitive Type (非基本型別)
+ Primitive: Number、 String、 Boolean、 Null、 Undefined Non-Primitive: Object、 Array、 Function、 Date、 Regx  兩者差異在於，給值方式的不同
+那麼可以分為 By value (值) 跟 By reference (參考位置)
+  Primitive Type 是 By value
+用 Number 舉例:
+ var a = 1var b = ab = 2console.log(a); // Output: 1console.log(b); // Output: 2// 修改 b 時不會修改到 a   Non-Primitive Type 是 By reference  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">18. December 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/multer/">multer</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>介紹   Multer 是一個 node.js 的中間件，&ldquo;只&quot;用於處理 multipart/form-data 類型的數據，主要用於上傳
+ 安裝:
+npm install --save multer 參數  req.file 的屬性    Key Description Note     fieldname 表單上面的名稱    originalname 電腦上顯示的檔案名稱    encoding 編碼    mimetype 文件的mime 類型    size 文件大小 (位元組)    destination 路徑 DiskStorage   filename 保存在 destination 的名稱 DiskStorage   path 完整路徑 DiskStorage   buffer 存放檔案的內存 MemoryStorage    multer(opts) 的 opts    Key Description     dest or storage 存放位置   fileFilter 過濾 (函式)   limits 限制數據   preservePath 保存完整文件路徑     storage  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">24. November 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/localstorage/">LocalStorage</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>介紹  Web Storage 為 HTML5 標準中新加入的技術 主要分兩種一個是
+sessionStorage
+ 放在sessionStorage的資料會在頁面(頁籤)關閉時清空，只要該頁面頁面(頁籤)沒被關閉或者有還原(restore)該頁面，資料就會保存。
+ localStorage
+ 放在localStorage的資料會永久保存，直到被使用者清除。
+ 早期瀏覽器要儲存暫存的資料會使用 cookie，而不管你使用哪個暫存你網頁的資料都要注意該筆資料是否敏感數據，因為只要打開控制台，你就隨意修改它們的值，而有心人士就可以利用此方式來做 XSS 攻擊
+支援  web storage method  更新 Storage
+Storage.setItem('key', 'value')  or
+Storage.'key' = 'value'  指定物件屬性的 key 以及 value ， 我們可以在 storage 物件中加入屬性或修改原本的屬性內容
+讀取 Storage
+Storage.getItem('key')  輸入屬性的 key ，我們可以得到 storage 物件對應的屬性 value
+刪除 Storage
+Storage.removeItem('key')  把指定的屬性從storage 物件中移除
+刪除 全部 Storage
+Storage.clear()  把storage 中的所有屬性移除 </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">24. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/unix-timestamp/">Unix timestamp</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>簡介  Unix timestamp (時間戳) 是指至格林威治時間 1970年01月01日00时00分00秒起 到現在的&quot;總秒數&quot;
+javascript 轉換   1572480000 &ndash;&gt; 2019-10-31 08:00:00 +0800  YYYY-MM-DD格式，使用主機時間
+function (timestamp = 1572480000) { const month = new Date(timestamp * 1000).getMonth() &lt; 10 ? 0 + (new Date(timestamp * 1000).getMonth() + 1) : new Date(timestamp * 1000).getMonth() + 1 const date = new Date(timestamp * 1000).getDate() &lt; 10 ? 0 + (new Date(timestamp * 1000).getDate()) : new Date(timestamp * 1000).getDate() const formatTime = `${new Date(timestamp * 1000).  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">23. October 2019</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/javascript-abbreviation/">JavaScript Abbreviation</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>三元運算子  當要寫 if else 判斷式時 一般會寫成
+const a = 7 let result if (a &gt; 0) { result = `a大於0` } else { result = `a小於0` }  簡寫
+let result = a &gt; 0 ? `a大於0` : `a小於0`   短路求值  當宣告一個變數給值時，想確認不是 null, undefined, 空值時 可能會這樣寫
+if (a !== null || a !== undefined || a !== '') { let b = a }  簡寫  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">20. October 2019</span>
+  </p>
+</article>
+ 
+	<nav class="pagination" role="pagination">
+		
+		<span class="page-number">Page 1 of 2</span>
+		
+			<a class="older-posts" href="/tags/javascript/page/2/">Older Posts <span aria-hidden="true">&rarr;</span></a>
+		
+	</nav>
+
+ </div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>HTTP - cache</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/http-cache/">HTTP - cache</a> 
+  </h1>
+
+  <div class="post-content"><h2 id="序">序</h2>
+<hr>
+<p>快取(cache)，聽過也大概知道有甚麼作用，但其中的原理還有 Header 中的一些相關配置就不是這麼的了解
+所以整理了一下資料讓自己更清楚。</p>
+<h2 id="快取cache-是甚麼">快取(Cache) 是甚麼</h2>
+<hr>
+<p>今天要瀏覽一個網頁，流程會是這樣</p>
+<blockquote>
+<p><strong>瀏覽器</strong> &ndash; 請求 &ndash;&gt; <strong>伺服器</strong> &ndash; 提供HTML、images&hellip;等相關資源 &ndash;&gt; <strong>瀏覽器</strong></p>
+</blockquote>
+<p>所以每次想要瀏覽一個網頁，就要從網頁伺服器，下載頁面、 圖片等等&hellip;的資源，假設今天那個網頁不常更新，內容其實都一樣，這樣每次下載一樣的東西，流量不就是浪費了嗎?
+這時候 快取(Cache) 就派上用場了。</p>
+<p>快取(Cache) 就是把比較不常變動的資源儲存起來在瀏覽器的快取中，當使用者今天要拜訪這個網頁時，就能快速把資料取出來。
+可以節省流量，也因為不用再下載，也可以節省時間。</p>
+<h2 id="expires">Expires</h2>
+<hr>
+<p>那麼要怎麼讓瀏覽器知道，這個頁面要快取呢?
+可以在 HTTP Response Header 裡面添加 Expires
+Expires 是 HTTP 1.0 的 Header</p>
+<pre><code>Expires: Tue, 12 Jan 2021 14:41:30 GMT
+</code></pre>
+<p>瀏覽器收到這個Response，就會把資源快取下來，當下一次瀏覽器要再次瀏覽這個網頁，瀏覽器會檢查自己本身的時間，去比對是否有過期，超過 Expires 的時間，如果沒有超過，瀏覽器就不會發送 Request ，直接從 快取 中拿取資料。</p>
+<p>那麼會有一個問題，瀏覽器比對是根據自己本身的時間，假設自己本身時間被改過，那麼就會失準。</p>
+<h2 id="cache-control-max-age">Cache-Control: max-age</h2>
+<hr>
+<p>為了解決這個問題 HTTP 1.1 堆出了 新的 Header，用法如下</p>
+<pre><code>Cache-Control: max-age=10
+</code></pre>
+<p>意思是這個請求的到期時間是10秒，在10秒之內重新整理，都是從快取裡面拿資料，超過10秒之後，才會重新送新的 Request。</p>
+<p>以上兩個，都是著重在 Response 的 新鮮度 (freshness) ，只要時間還沒到期，就去快取裡面拿資料，過期才發送 Resquest
+，那麼如果一個 Header 同時有 Expires 和 Cache-Control: max-age 會優先參考 max-age。</p>
+<h2 id="last-modified--if-modified-since">last-modified &amp; if-modified-since</h2>
+<hr>
+<p>前面兩個有提到如果過期之後就是發送一個新的 Request ，那麼可能有一種情況新鮮度過期了，但去跟伺服器請求資料發現，資料還是沒更新跟快取中的還是一樣，那在這情況之下，有辦法就直接找快取拿資料嗎?</p>
+<p>答案是有的，如下:</p>
+<pre><code>Server 給的 Response :
+
+last-modified: Tue, 22 Oct 2019 18:15:00 GMT
+cache-control: max-age=10
+</code></pre>
+<p>那麼經過了11秒，新鮮度過期了發送了一個 Request</p>
+<pre><code>client  發的 Request :
+
+if-modified-since: Tue, 22 Oct 2019 18:15:00 GMT // 把當初收到的 last-modified 傳回去
+</code></pre>
+<p>這時候伺服器收到，就會確認 last-modified 的日期 是否有更改過，如果有新的就傳新的，沒有的話 Server會回傳 Status code: 304,表示你可以繼續沿用快取。</p>
+<p>last-modified 是 指檔案的編輯時間，假設你今天打開這個檔案甚麼都不改然後存檔，編輯時間就會被更改，但實際上內容還是一樣</p>
+<h2 id="etag--if-none-match">etag &amp; if-none-match</h2>
+<hr>
+<p>為了更加確認，檔案真的不一樣了，而不是單純的參考編輯時間，所以又出現了這個 Header。  Etag 可以想像是，把目前檔案裡的內容編成一個數值，如果檔案內容不變，etag的值不會變，但如果改變了就會有一個新的etag值。
+流程基本上跟 last-modified 一模一樣。</p>
+<h2 id="cache-control-no-store--no-cache">Cache-Control: no-store &amp; no-cache</h2>
+<hr>
+<pre><code>no-store: 完全不使用快取                             // 永遠不用快取
+no-cache: 每次都會發送 Request，確認是否有新的檔案    //  永遠檢查快取
+</code></pre>
+<h2 id="參考資料">參考資料</h2>
+<hr>
+<p><a href="https://blog.techbridge.cc/2017/06/17/cache-introduction/">循序漸進理解 HTTP Cache 機制</a></p>
+<p><a href="https://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ">彻底弄懂 Http 缓存机制 - 基于缓存策略三要素分解法</a></p>
+<p><a href="https://imweb.io/topic/5795dcb6fb312541492eda8c">HTTP缓存控制小结</a></p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">15. January 2020</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

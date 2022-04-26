@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>使用Hugo</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/">使用Hugo</a> 
+  </h1>
+
+  <div class="post-content"><p><strong>建置環境:Windows-64bit</strong></p>
+<hr>
+<h2 id="安裝hugo">安裝Hugo</h2>
+<p>前往:
+<a href="https://github.com/gohugoio/hugo/releases">https://github.com/gohugoio/hugo/releases</a></p>
+<p>下載對應的版本</p>
+<p>在 C:\ 底下建立 一個新資料夾 命名 Hugo
+裡面再建立一個子資料夾 命名 bin</p>
+<p>把剛剛下載的檔案 全部解壓縮 放入 C:\Hugo\bin</p>
+<p>使用 CMD 下指令 確認版本號</p>
+<pre><code>C:\Hugo\bin&gt;hugo version
+</code></pre>
+<p>再去 控制台 -&gt; 編輯系統環境變數</p>
+<p>環境變數 -&gt; 使用者變數的 Path 把剛剛的</p>
+<pre><code>C:\Hugo\bin
+</code></pre>
+<p>新增進去</p>
+<p>使用 CMD 去確認 有新增成功</p>
+<pre><code>C:\&gt;hugo version	
+</code></pre>
+<p>有跳出版本訊息 才算成功</p>
+<hr>
+<h2 id="新增一個新的-site">新增一個新的 Site</h2>
+<p>指令</p>
+<pre><code>hugo new site [Site名稱]
+</code></pre>
+<p>線上選取一個主題: 
+<a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a></p>
+<p>選取主題後，底下作者都有教怎麼安裝
+請參考</p>
+<p>新增第一篇文章試試看</p>
+<p>指令</p>
+<pre><code>hugo new posts/my-first-post.md
+</code></pre>
+<p>會在	   \content\posts  找到我們新增的第一篇文章</p>
+<p>這時候下指令</p>
+<pre><code>hugo server -D
+</code></pre>
+<p>就會在 http://localhost:1313/ 看到成果</p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">03. October 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

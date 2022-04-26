@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>css3 on Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/tags/css3/</link>
+    <description>Recent content in css3 on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 25 Dec 2019 15:47:49 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/tags/css3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flexbox 屬性</title>
+      <link>https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/</link>
+      <pubDate>Wed, 25 Dec 2019 15:47:49 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/flexbox-%E5%B1%AC%E6%80%A7/</guid>
+      <description>display: flex flex: 主要是 main axis 與 cross axis 構成
+main axis &amp;gt; 左右向
+cross axis &amp;gt; 上下向
+那麼有一些設定屬性，如下。
+flex-direction  設定主軸 (main axis) 的方向
+ .container {display: flex;flex-direction: row; // 橫向flex-direction: row-reverse; // 橫向，反序排列flex-direction: column; // 主軸變直向flex-direction: column-reverse; // 主軸變直向, 反序排列} justify-content  與主軸 (main axis) 的對齊方式
+ .container {display: flex;justify-content: flex-start; // 靠左justify-content: flex-end; // 靠右justify-content: center; // 置中justify-content: space-between; // 貼齊父容器，每個子元素的間格一致justify-content: space-around; // 與父容器的間格為，每個元素間格的一半justify-content: space-evenly; // 每個元素與父容器都是相同的間格} align-items  交叉軸 (cross axis) 的對齊方式</description>
+    </item>
+    
+    <item>
+      <title>使用Hugo</title>
+      <link>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/</link>
+      <pubDate>Thu, 03 Oct 2019 20:09:38 +0800</pubDate>
+      
+      <guid>https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8hugo/</guid>
+      <description>建置環境:Windows-64bit
+ 安裝Hugo 前往: https://github.com/gohugoio/hugo/releases
+下載對應的版本
+在 C:\ 底下建立 一個新資料夾 命名 Hugo 裡面再建立一個子資料夾 命名 bin
+把剛剛下載的檔案 全部解壓縮 放入 C:\Hugo\bin
+使用 CMD 下指令 確認版本號
+C:\Hugo\bin&amp;gt;hugo version 再去 控制台 -&amp;gt; 編輯系統環境變數
+環境變數 -&amp;gt; 使用者變數的 Path 把剛剛的
+C:\Hugo\bin 新增進去
+使用 CMD 去確認 有新增成功
+C:\&amp;gt;hugo version	 有跳出版本訊息 才算成功
+ 新增一個新的 Site 指令
+hugo new site [Site名稱] 線上選取一個主題: https://themes.gohugo.io/
+選取主題後，底下作者都有教怎麼安裝 請參考
+新增第一篇文章試試看
+指令
+hugo new posts/my-first-post.md 會在	\content\posts 找到我們新增的第一篇文章
+這時候下指令</description>
+    </item>
+    
+  </channel>
+</rss>

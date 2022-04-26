@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Unable to retrieve a connection&#39;s remote IP address under IISNode</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/unable-to-retrieve-a-connections-remote-ip-address-under-iisnode/">Unable to retrieve a connection&#39;s remote IP address under IISNode</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="狀況">狀況</h1>
+<hr>
+<p>在 IIS 底下安裝 IISNode 模組，並在後端架設一個 Node.exe
+要在 Node.exe 上獲取遠端連接的IP位址會失敗。
+因為 IISNode 像是一個 reverse proxy 多個源頭進來，但 Node.exe 只會看到一個位址
+就是 IISNode 所有的 client 連進來都看不到。
+另外 IISNode 與 Node.exe 之間的連接是走命名的方式，不是走 TCP，所以在
+Node.exe 無法取到 IP address</p>
+<h1 id="解決">解決</h1>
+<hr>
+<p>在 IISNode 的 web.config 上添加</p>
+<pre><code>&lt;configuration&gt;
+	&lt;system.webServer&gt;
+
+		&lt;!-- ... --&gt;
+
+		&lt;iisnode enableXFF=&quot;true&quot; /&gt;
+
+	&lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>這樣 client 連進來 IISNode 要拋給 Node.exe 就會添加 一個 X-Forwarded-For request header
+把外部進來 IP　再傳遞下去</p>
+<pre><code>const http = require('http')
+  http.createServer(function (req, res) {
+  const xff = req.headers['x-forwarded-for']
+  // ...
+}).listen(process.env.PORT)
+</code></pre>
+<h1 id="參考連結">參考連結</h1>
+<hr>
+<p><a href="https://github.com/tjanczuk/iisnode/issues/94">github_issues</a></p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">08. November 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

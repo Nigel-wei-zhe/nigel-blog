@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>me on Nigel 隨便寫</title>
+    <link>https://nigel-wei-zhe.github.io/about/</link>
+    <description>Recent content in me on Nigel 隨便寫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2022 nigel-lee. All rights reserved.</copyright>
+    <lastBuildDate>Mon, 18 Apr 2022 16:31:39 +0800</lastBuildDate><atom:link href="https://nigel-wei-zhe.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

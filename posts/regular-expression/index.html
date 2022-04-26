@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+
+    <title>Regular Expression</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content">
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/regular-expression/">Regular Expression</a> 
+  </h1>
+
+  <div class="post-content"><h1 id="介紹">介紹</h1>
+<hr>
+<p>Regular Expression (RegExp) 正規表達式
+用來判斷字串是否有符合格式
+線上測試Reg格式的網址:https://regexr.com/</p>
+<h1 id="regexp宣告">RegExp宣告</h1>
+<hr>
+<p>以下用js示範
+直接例項化:</p>
+<pre><code>var reg = new RegExp(pattern [, flags])
+</code></pre>
+<p>隱式建立:</p>
+<pre><code>var reg = /pattern/flags
+</code></pre>
+<p>pattern 是一個字串，填入正規表示式
+flags 是一個可選的字串，包含屬性 &lsquo;g&rsquo;（global ）、&lsquo;i&rsquo; （ignoreCase）和 &rsquo;m&rsquo;（multiline）</p>
+<h1 id="regexp-物件方法">RegExp 物件方法</h1>
+<hr>
+<p>test:
+檢索字串中是否存在指定的值。返回值是 true 或 false</p>
+<pre><code>var reg = new RegExp('a')
+console.log(reg.test('abc'))
+
+OUTPUT: true
+</code></pre>
+<p>exec:
+檢索字串中的指定值。返回值是被找到的值。如果沒有發現匹配，則返回 null</p>
+<pre><code>var reg = new RegExp('a')
+console.log(reg.exec('abc'))
+
+OUTPUT: a
+</code></pre>
+<p>replace:
+替換與正規表示式匹配的子串</p>
+<pre><code>var str = 'hi'
+console.log(str.replace(/hi/, 'yo'));
+
+OUTPUT: yo
+</code></pre>
+<h1 id="範例">範例</h1>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">RegExp</th>
+<th style="text-align:center">說明</th>
+<th style="text-align:center">範例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>/^09\d{8}$/</code></td>
+<td style="text-align:center">手機號碼</td>
+<td style="text-align:center">&ldquo;0912345678&rdquo;</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/^.*@gmail\.com$/</code></td>
+<td style="text-align:center">gmail</td>
+<td style="text-align:center">&ldquo;<a href="mailto:123@gmail.com">123@gmail.com</a>&rdquo;</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/^[A-Z]\d{9}$/</code></td>
+<td style="text-align:center">身分證字號</td>
+<td style="text-align:center">&ldquo;A123456789&rdquo;</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/^\d{4}-\d{2}-\d{2}$/</code></td>
+<td style="text-align:center">西元生日格式</td>
+<td style="text-align:center">&ldquo;1993-08-07&rdquo;</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/^U[0-9a-f]{32}$/</code></td>
+<td style="text-align:center">LineID</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/^[1-9][0-9]{4,9}$/</code></td>
+<td style="text-align:center">QQ號</td>
+<td style="text-align:center">&ldquo;10583600&rdquo;</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/^\d $/</code></td>
+<td style="text-align:center">是否是數字</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/[\u4e00-\u9fa5]/</code></td>
+<td style="text-align:center">是否存在中文</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="參考來源">參考來源</h1>
+<hr>
+<p><a href="https://codertw.com/">https://codertw.com/</a>前端開發/231904/</p>
+</div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">08. October 2019</span>
+  </p>
+</article>
+</div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

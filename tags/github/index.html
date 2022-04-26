@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <link
+      href="/tags/github/index.xml"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    <link
+      href="/tags/github/index.xml"
+      rel="feed"
+      type="application/rss+xml"
+      title="Nigel 隨便寫"
+    />
+    
+
+    <title>github</title>
+
+     
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/colors-dark.min.04ff1d6d2078fa65747fb72cef57eee0015c1b56e56c24eed85082032b2182f4.css" />
+    <link rel="stylesheet" href="https://nigel-wei-zhe.github.io/css/mystyle.min.b714d93137a57ef2061e952e17d9d0c9bba8139d60a5ea4752530352bb90b2f0.css" />
+
+    
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="https://nigel-wei-zhe.github.io/">Nigel 隨便寫</a></h1>
+      <p>唯一應該超越的人，是昨天的自己</p>
+      <p>The only person you should try to be better than, is who you were yesterday.</p>
+    </header>
+
+    <div id="page">
+      <div id="sidebar"><nav>
+	
+		<ul class="nav">
+			
+				<li>
+					<a href="/about">
+						<div class="nav-item">
+							<span>About Me</span>
+							<span class="identifier">關於我</span>
+						</div>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/posts">
+						<div class="nav-item">
+							<span>Blog</span>
+							<span class="identifier">網誌</span>
+						</div>
+					</a>
+				</li>
+			
+		</ul>
+	
+</nav>
+</div>
+
+      <div id="content"> 
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/testaxiosinjest/">Jest 學習筆記</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>How to test axios by jest 最近剛好在寫單元測試,看了些東西,有些眉眉角角,像是有函式在 Node.js 下並不支援,導致單元測試過不了。像是這篇 Jest: TypeError: replaceAll is not a function 
+ 那麼在寫單元測試時,有碰到 axios,所以就稍微查網路做功課,以下就列出看到的方法
+ 藉由 jest.mock 替換掉 axios  SUT: System Under Test 測試目標DOC: Depended-on Component 依賴組件情況是這樣,有時候 SUT 有太多的 DOC ,為了避免模糊焦點,讓測試邏輯相對單純,所以可以會把一些 相依的 DOC,採用 mock 替換掉, 讓測試不失焦。
+   import axios from &#34;axios&#34;  jest.mock(&#34;axios&#34;)  describe(&#34;axios 流程&#34;, () =&gt; {  test(&#34;success&#34;, () =&gt; {  const data = {  success: true  }  // 在axios.  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">02. June 2021</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/createelement/">createElement 隨手記</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>關於 createElement Document.createElement()  創造一個元素,搭配其他 api 可以實現在指定的元素後,把創造出來的新元素添加上去
+ const title = document.createElement(&#34;div&#34;); title.innerText = &#34;Hello world&#34;; document.getElementsByTagName(&#34;body&#34;)[0].appendChild(title); vue createElement()  vue 製作 Virtual DOM 的函式,透過 render function 呼叫 createElement 來創造, 內部含有實現進行 diff 算法比較新舊 Virtual DOM 的差異,進而觸發渲染
+ Vue.component(&#34;hello-world&#34;, {  render(createElement) {  return createElement(&#34;h1&#34;, {  domProps: {  innerHTML: &#34;Hello world&#34;,  },  });  }, });  vue createElement() 應用  參數相關設定可以直接參考 官網。 直接舉個使用經驗,今天有一個需求是需要基於 vue 提供的 transition 的标签名進行加工 目的是想透過 transition 本身針對 enter 跟 leave 的相關事件,來實作收合  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">15. May 2021</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/arrayprototypereduce/">Array.prototype.reduce 不只可以當作計數器</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>語法 array.reduce(  callback[(accumulator, currentValue, currentIndex, array)],  initialValue );  物件陣列轉 mapping 表 array.reduce((map, item) =&gt; Object.assign(map, { [item.id]: item.name }), {}); 二維陣列轉一維 array.reduce((acc, cur) =&gt; {  return acc.concat(cur); }, []); 統計陣列中元素出現次數 array.reduce((acc, cur) =&gt; {  if (cur in acc) {  acc[cur] = 1;  } else {  acc[cur] += 1;  }  return acc; }, {}); 物件陣列依條件分類 array.reduce((acc, cur) =&gt; {  if (!  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">08. April 2021</span>
+  </p>
+</article>
+
+<article class="post">
+  <h1>
+    <a href="https://nigel-wei-zhe.github.io/posts/%E4%BD%BF%E7%94%A8github.io%E4%BD%88%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84website/">使用github.io佈署自己的website&#34;</a> 
+  </h1>
+
+  <div class="post-content">
+    <p>Github有提供可以呈現靜態檔案的伺服器 只有靜態檔案，所以動態網頁是無法呈現的
+使用方法如下:
+ 1.Create a repository
+前往 github 創一個新的 repository 名稱必須和使用者一樣 ( 使用者名稱/使用者名稱.github.io ) 舉例: Nigel-wei-zhe/Nigel-wei-zhe.github.io
+!!! 要設定為 Public !!!
+ 2.在本地端建立資料夾
+創好 repository 後 可以選擇在本地端clone一個資料夾或者自己創一個透過git指令上傳 這邊示範自己建資料夾git上傳
+首先在桌面創建一個資料夾 page 並在資料夾裡隨意新增一個 index.html 隨便寫點內容
+index.html:
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;I'm hosted with GitHub Pages.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt; 存檔
+接著透過上方路徑列開啟cmd
+C:\Users\Nigel\Desktop\page&gt; 開始添加git指令:
+echo &quot;# my first page&quot; &gt;&gt; README.mdgit initgit add .git commit -m &quot;first commit&quot;git remote add origin https://github.  … </p>
+  </div>
+
+  <p class="meta">
+    Posted on
+    <span class="postdate">05. October 2019</span>
+  </p>
+</article>
+ 
+ </div>
+
+      <footer id="footer">
+        <p class="copyright">
+           Copyright © 2022 nigel-lee. All rights reserved. 
+        </p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
