@@ -1,11 +1,11 @@
-baseURL = "https://nigel-wei-zhe.github.io/nigel-blog/"
+baseURL = "https://nigel-wei-zhe.github.io/"
 languageCode = 'en-us'
 title = 'Nigel 隨便寫'
 theme = '/solar-theme-hugo/'
 
 
 paginate = 5
-pygmentsStyle = "solarized-light" # solarized-light, -dark or -dark256
+pygmentsStyle = "-dark" # solarized-light, -dark or -dark256
 copyright = "Copyright © 2022 nigel-lee. All rights reserved."
 
 [params]

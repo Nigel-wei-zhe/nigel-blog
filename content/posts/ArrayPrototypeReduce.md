@@ -1,81 +1,86 @@
-# Array.prototype.reduce 使用
-
+---
+title: "Array.prototype.reduce 不只可以當作計數器"
+date: 2021-04-08T17:28:06+08:00
+draft: false
+description: "github.io"
+tags: ["github"]
 ---
 
 ## 語法
 
 ```js
-array.reduce(callback[(accumulator, currentValue, currentIndex, array)], initialValue)
+array.reduce(
+  callback[(accumulator, currentValue, currentIndex, array)],
+  initialValue
+);
 ```
 
 ---
 
-## 使用
-
 #### 物件陣列轉 mapping 表
 
 ```js
-array.reduce((map, item) => Object.assign(map, { [item.id]: item.name }), {})
+array.reduce((map, item) => Object.assign(map, { [item.id]: item.name }), {});
 ```
 
 #### 二維陣列轉一維
 
 ```js
 array.reduce((acc, cur) => {
-    return acc.concat(cur)
-}, [])
+  return acc.concat(cur);
+}, []);
 ```
 
 #### 統計陣列中元素出現次數
 
 ```js
 array.reduce((acc, cur) => {
-    if (cur in acc) {
-        acc[cur] = 1
-    } else {
-        acc[cur] += 1
-    }
-    return acc
-}, {})
+  if (cur in acc) {
+    acc[cur] = 1;
+  } else {
+    acc[cur] += 1;
+  }
+  return acc;
+}, {});
 ```
 
 #### 物件陣列依條件分類
 
 ```js
 array.reduce((acc, cur) => {
-    if (!acc[cur.type]) {
-        acc[cur.type] = []
-    }
-    acc[cur.type].push(cur)
-    return acc
-}, {})
+  if (!acc[cur.type]) {
+    acc[cur.type] = [];
+  }
+  acc[cur.type].push(cur);
+  return acc;
+}, {});
 ```
 
 #### 陣列去重
 
 ```js
 array.reduce((acc, cur) => {
-    if (!acc.includes(cur)) {
-        acc.push(cur)
-    }
-    return acc
-}, [])
+  if (!acc.includes(cur)) {
+    acc.push(cur);
+  }
+  return acc;
+}, []);
 ```
 
 #### 求最大值或最小值
 
 ```js
 array.reduce((acc, cur) => {
-    if (!acc) {
-        acc = cur
-        return acc
-    }
-    if (acc.age < cur.age) {
-        acc = cur
-        return acc
-    }
-    return acc
-}, 0)
+  if (!acc) {
+    acc = cur;
+    return acc;
+  }
+  if (acc.age < cur.age) {
+    acc = cur;
+    return acc;
+  }
+  return acc;
+}, 0);
 ```
 
 ---

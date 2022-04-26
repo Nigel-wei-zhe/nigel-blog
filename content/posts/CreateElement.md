@@ -1,3 +1,12 @@
+---
+author: "Nigel"
+title: "createElement 隨手記"
+date: 2021-05-15T17:28:06+08:00
+draft: false
+description: "github.io"
+tags: ["github"]
+---
+
 ## 關於 createElement
 
 ### Document.createElement()
@@ -5,9 +14,9 @@
 > 創造一個元素,搭配其他 api 可以實現在指定的元素後,把創造出來的新元素添加上去
 
 ```js
-const title = document.createElement("div")
-title.innerText = "Hello world"
-document.getElementsByTagName("body")[0].appendChild(title)
+const title = document.createElement("div");
+title.innerText = "Hello world";
+document.getElementsByTagName("body")[0].appendChild(title);
 ```
 
 ### vue createElement()
@@ -17,14 +26,14 @@ document.getElementsByTagName("body")[0].appendChild(title)
 
 ```js
 Vue.component("hello-world", {
-    render(createElement) {
-        return createElement("h1", {
-            domProps: {
-                innerHTML: "Hello world",
-            },
-        })
-    },
-})
+  render(createElement) {
+    return createElement("h1", {
+      domProps: {
+        innerHTML: "Hello world",
+      },
+    });
+  },
+});
 ```
 
 ---
@@ -36,57 +45,57 @@ Vue.component("hello-world", {
 > 目的是想透過 transition 本身針對 enter 跟 leave 的相關事件,來實作收合
 
 ```js
-const transitionStyle = "0.3s height ease-in-out"
+const transitionStyle = "0.3s height ease-in-out";
 const Transition = {
-    beforeEnter(el) {
-        el.style.transition = transitionStyle
-        if (!el.dataset) el.dataset = {}
-        el.style.height = 0
-    },
+  beforeEnter(el) {
+    el.style.transition = transitionStyle;
+    if (!el.dataset) el.dataset = {};
+    el.style.height = 0;
+  },
 
-    enter(el) {
-        if (el.scrollHeight !== 0) {
-            el.style.height = `${el.scrollHeight}px`
-        } else {
-            el.style.height = ""
-        }
-        el.style.overflow = "hidden"
-    },
+  enter(el) {
+    if (el.scrollHeight !== 0) {
+      el.style.height = `${el.scrollHeight}px`;
+    } else {
+      el.style.height = "";
+    }
+    el.style.overflow = "hidden";
+  },
 
-    afterEnter(el) {
-        el.style.transition = ""
-        el.style.height = ""
-    },
+  afterEnter(el) {
+    el.style.transition = "";
+    el.style.height = "";
+  },
 
-    beforeLeave(el) {
-        if (!el.dataset) el.dataset = {}
-        el.style.height = `${el.scrollHeight}px`
-        el.style.overflow = "hidden"
-    },
+  beforeLeave(el) {
+    if (!el.dataset) el.dataset = {};
+    el.style.height = `${el.scrollHeight}px`;
+    el.style.overflow = "hidden";
+  },
 
-    leave(el) {
-        if (el.scrollHeight !== 0) {
-            el.style.transition = transitionStyle
-            el.style.height = 0
-        }
-    },
+  leave(el) {
+    if (el.scrollHeight !== 0) {
+      el.style.transition = transitionStyle;
+      el.style.height = 0;
+    }
+  },
 
-    afterLeave(el) {
-        el.style.transition = ""
-        el.style.height = ""
-    },
-}
+  afterLeave(el) {
+    el.style.transition = "";
+    el.style.height = "";
+  },
+};
 
 export default {
-    name: "CollapseTransition",
-    functional: true,
-    render(h, { children }) {
-        const data = {
-            on: Transition,
-        }
-        return h("transition", data, children)
-    },
-}
+  name: "CollapseTransition",
+  functional: true,
+  render(h, { children }) {
+    const data = {
+      on: Transition,
+    };
+    return h("transition", data, children);
+  },
+};
 // 備註:
 
 // 事件监听器在 `on` 内，

@@ -4,7 +4,7 @@
     <a href="{{ .Permalink }}">{{ .Title }}</a> {{ if .Draft }}(Draft){{ end }}
   </h1>
 
-  <div class="post-content">456{{ .Content | safeHTML }}</div>
+  <div class="post-content">{{ .Content | safeHTML }}</div>
 
   <p class="meta">
     Posted on

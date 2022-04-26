@@ -3,20 +3,32 @@
   <ul>
     <li>
       <div>
-        <title>天堂遊戲有限公司</title>
+        <title>天堂遊戲有限公司 - FE</title>
         <time>2020-03 ~ </time>
+        <p>- 彩票資訊站 ( Nuxt.js / Vant / SASS)</p>
+        <p>- 重構彩票後台 (Vue / Element UI )</p>
+        <p>- 交易撮合平台 ( Vue / Element UI / I18n )</p>
+        <p>- 第三方串接後台 ( Vue / FullCalendar / Echarts )</p>
+        <p>- 即時通信 IM ( Vue3 / WebSocket / Typescript )</p>
+        <p>- CI / CD調整 ( GitLab-CI / Docker / Nginx / Rancher )</p>
       </div>
     </li>
     <li>
       <div>
-        <title>黛寶拉股份有限公司</title>
+        <title>黛寶拉股份有限公司 - MIS</title>
         <time>2016-10 ~ 2020-02</time>
+        <p>- ERP維護</p>
+        <p>- Windows Server 2008 R2 環境建置與維護</p>
+        <p>- LINE Bot 串接 (Node.js - express)</p>
+        <p>- 會員服務網頁 ( Vue / Sass)</p>
       </div>
     </li>
     <li>
       <div>
-        <title>銘傳大學</title>
-        <title>Ming Chuan University,MCU</title>
+        <title>銘傳大學 - 電腦與通訊工程學系</title>
+        <title style="font-size: 0.2rem">
+          MCU - Department of Information and Telecommunications Engineering
+        </title>
         <time>2011-09 ～ 2015-06</time>
       </div>
     </li>
@@ -58,7 +70,7 @@
 <style>
   .timeline ul {
     padding: 0px 0;
-    color: #fff;
+    color: #839496;
   }
 
   .timeline ul li {
@@ -67,7 +79,7 @@
     width: 6px;
     margin: 0;
     padding-top: 15px;
-    background: #fff;
+    background: #839496;
   }
   /* 中間圓點 */
   .timeline ul li::after {
@@ -76,8 +88,8 @@
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: inherit;
     z-index: 1;
@@ -88,7 +100,9 @@
     bottom: 0;
     width: 350px;
     padding: 15px;
-    background: #cb4b16;
+    background: #002a35;
+    border-color: #839496;
+    border: 1px solid;
   }
   /* arrow */
   .timeline ul li div::before {
@@ -107,7 +121,7 @@
   .timeline ul li div::before {
     left: -15px;
     border-width: 8px 16px 8px 0;
-    border-color: transparent #cb4b16 transparent transparent;
+    border-color: transparent #839496 transparent transparent;
   }
 
   title {
@@ -121,6 +135,9 @@
     font-weight: bold;
     margin-bottom: 8px;
   }
+  .in-view > div > p {
+    margin: 0;
+  }
 
   /* EFFECTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -130,7 +147,7 @@
   }
 
   .timeline ul li.in-view::after {
-    background: #cb4b16;
+    background: #839496;
   }
 
   .timeline ul li div {
@@ -167,7 +184,20 @@
       margin-left: 20px;
     }
     .timeline ul li div {
-      width: calc(100vw - 91px);
+      width: calc(100vw - 150px);
+    }
+    title {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .nav {
+      display: flex;
+      overflow-y: auto;
+    }
+    .nav-item {
+      padding: 0 20px;
+      text-align: right;
     }
   }
 

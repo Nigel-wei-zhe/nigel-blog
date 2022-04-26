@@ -1,3 +1,11 @@
+---
+title: "Jest 學習筆記"
+date: 2021-06-02T17:28:06+08:00
+draft: false
+description: "github.io"
+tags: ["github"]
+---
+
 ## How to test axios by jest
 
 最近剛好在寫單元測試,看了些東西,有些眉眉角角,像是有函式在 Node.js 下並不支援,導致單元測試過不了。<br>
@@ -9,9 +17,9 @@
 那麼在寫單元測試時,有碰到 axios,所以就稍微查網路做功課,以下就列出看到的方法
 
 1. 藉由 jest.mock 替換掉 axios
-    > SUT: System Under Test 測試目標<br>
-    > DOC: Depended-on Component 依賴組件<br>
-    > 情況是這樣,有時候 SUT 有太多的 DOC ,為了避免模糊焦點,讓測試邏輯相對單純,所以可以會把一些 相依的 DOC,採用 mock 替換掉, 讓測試不失焦。
+   > SUT: System Under Test 測試目標<br>
+   > DOC: Depended-on Component 依賴組件<br>
+   > 情況是這樣,有時候 SUT 有太多的 DOC ,為了避免模糊焦點,讓測試邏輯相對單純,所以可以會把一些 相依的 DOC,採用 mock 替換掉, 讓測試不失焦。
 
 ```js
 import axios from "axios"
@@ -33,45 +41,45 @@ describe("axios 流程", () => {
 ```
 
 2. 引用
-    > axios.interceptors 裡面也有邏輯要做測試,如果用上面那一招,會被蓋掉<br>
-    > 蓋掉不用測這樣覆蓋率就 100%了 XD
+   > axios.interceptors 裡面也有邏輯要做測試,如果用上面那一招,會被蓋掉<br>
+   > 蓋掉不用測這樣覆蓋率就 100%了 XD
 
 ```js
 // 基於 axios 再次封裝的 request 有在 interceptors 寫些邏輯
-import request from "@/utils/request"
+import request from "@/utils/request";
 
 const mockData = {
-    config: {
-        url: "/test",
-    },
-    data: "test",
-}
+  config: {
+    url: "/test",
+  },
+  data: "test",
+};
 
 describe("request interceptors flow ~", () => {
-    // resolve 流程
-    const fulfilled = request.interceptors.request.handlers[0].fulfilled
-    test("resolve handle", () => {
-        expect(fulfilled(mockData)).toEqual(mockData)
-    })
-    // resolve 流程
-    const rejected = request.interceptors.request.handlers[0].rejected
-    test("resolve handle", () => {
-        rejected()
-    })
-})
+  // resolve 流程
+  const fulfilled = request.interceptors.request.handlers[0].fulfilled;
+  test("resolve handle", () => {
+    expect(fulfilled(mockData)).toEqual(mockData);
+  });
+  // resolve 流程
+  const rejected = request.interceptors.request.handlers[0].rejected;
+  test("resolve handle", () => {
+    rejected();
+  });
+});
 
 describe("response interceptors flow ~", () => {
-    // resolve 流程
-    const fulfilled = request.interceptors.response.handlers[0].fulfilled
-    test("resolve handle", () => {
-        expect(fulfilled(mockData)).toEqual(mockData)
-    })
-    // resolve 流程
-    const rejected = request.interceptors.response.handlers[0].rejected
-    test("resolve handle", () => {
-        rejected()
-    })
-})
+  // resolve 流程
+  const fulfilled = request.interceptors.response.handlers[0].fulfilled;
+  test("resolve handle", () => {
+    expect(fulfilled(mockData)).toEqual(mockData);
+  });
+  // resolve 流程
+  const rejected = request.interceptors.response.handlers[0].rejected;
+  test("resolve handle", () => {
+    rejected();
+  });
+});
 ```
 
 以上就是 這次為了測試 axios 有用到的方法,繼續提升覆蓋率~

@@ -1,0 +1,1 @@
+.nav .nav-item{margin:8px 0;font-size:1rem;line-height:1rem;display:flex;flex-direction:column}.nav .nav-item .identifier{font-size:.5rem;line-height:.6rem}
