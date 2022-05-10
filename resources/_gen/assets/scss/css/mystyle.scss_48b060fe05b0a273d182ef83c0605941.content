@@ -1,1 +1,1 @@
-.nav .nav-item{margin:8px 0;font-size:1rem;line-height:1rem;display:flex;flex-direction:column}.nav .nav-item .identifier{font-size:.5rem;line-height:.6rem}
+.nav .nav-item{margin:8px 0;font-size:2rem;line-height:2rem;display:flex;flex-direction:column}.nav .nav-item .identifier{font-size:1.5rem;line-height:1.5rem}@media(max-width:414px){.nav{display:flex;overflow-y:auto}.nav .nav-item{font-size:1.5rem;line-height:1.5rem;padding:0 20px;text-align:right}.nav .nav-item .identifier{font-size:1rem;line-height:1rem}}
